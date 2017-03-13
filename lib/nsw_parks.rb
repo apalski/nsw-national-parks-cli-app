@@ -48,15 +48,20 @@ class NSWParks
    	  end
    end
 
+   def self.nsw_regions
+		regions = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/visit-a-park"))
+		list = regions.css("#mainParkNavJump ul li")
+		list.collect.with_index(1) {|a,i| puts "#{i}. #{a.children.text}"}
+   end
+
    def self.park_region
   		@@all.each.with_index do |region, i|
   			park = Nokogiri::HTML(open("#{@@all[i].park_url}"))
   		 	@@all[i].park_region = park.css("#content__inner ul.parkDetail li.parkDetail__region").text
   		end	
-  	end
-
+   end
+	
  end 	
-
 
 
 
