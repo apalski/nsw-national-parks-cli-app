@@ -32,8 +32,15 @@ class NSWParks
 		puts parks_overview = park.css("#content__inner div.overviewIntro div.overviewIntro__readMoreText p").text
   	end
 
+  	def self.region
+  		@@all.each.with_index do |region, i|
+  			park = Nokogiri::HTML(open("#{@@all[i].park_url}"))
+  		 	@@all[i].park_region = park.css("#content__inner ul.parkDetail li.parkDetail__region").text
+  		end	
+  	end
+  	
    # Show the Regions that NSW National Parks are listed within
-   def self.nsw_regions
+   def self.nsw_areas
 		regions = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/visit-a-park"))
 		list = regions.css("#mainParkNavJump ul li")
 		# Put out the list of Regions numerically
@@ -41,14 +48,30 @@ class NSWParks
    end
 
    # Assign a region to each NSW National Park in the collection
-   def self.park_region
-  		@@all.each.with_index do |region, i|
-  			park = Nokogiri::HTML(open("#{@@all[i].park_url}"))
-  		 	@@all[i].park_region = park.css("#content__inner ul.parkDetail li.parkDetail__region").text
-  		end	
+   def self.park_region(region_no)
+   		areas = []
+		regions = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/visit-a-park"))
+		list = regions.css("#mainParkNavJump ul li")
+		# Put out the list of Regions numerically
+		list.collect.with_index(1) do |a,i| 
+			puts "#{i}. #{a.children.text}"
+			areas << a.children.text
+		end	
+   		array = []
+  		areas.each.with_index do |area,i|	
+  			if region_no.to_i == i + 1
+  				array << @@all.each { |region| region.park_region == areas[i]}
+  			end
+  		end
+  		puts "NSW National Parks in the #{areas[park_no.to_i - 1]} region are:"
+  		array.collect.with_index(1) {|a,i| puts "#{i}. #{a[i].name}"}
+  				
    end
 	
  end 	
+
+ NSWParks.new_park
+ NSWParks.park_region("1")
 
 
 

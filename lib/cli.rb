@@ -1,5 +1,6 @@
 #require '../config/environment'
 #require_relative '../lib/nsw_parks'
+require 'background_lite'
 
 class CLI
 
@@ -7,8 +8,13 @@ class CLI
     NSWParks.new_park
     puts ""
     puts ""
-    puts "Welcome to the NSW National Parks Information App"
+    puts "Welcome to the Unofficial NSW National Parks App"
+    background_method
     start   
+  end
+
+  def background_method
+    
   end
 
   def park_list
@@ -26,25 +32,43 @@ class CLI
     NSWParks.park_overview(park_no)
   end
 
+  def park_area
+    puts ""
+    NSWParks.nsw_areas
+  end
+
+  def park_region
+    region_no = 0
+    park_area
+    puts "Enter the number for the region you are interested in:"
+    region_no = gets.strip
+    array = NSWParks.park_region(region_no)
+    array.each.with_index {|a,i| puts "#{i}. #{a}"}
+  end
+
   def start
     answer = 0 
     while answer != "exit"
       puts ""
       puts "For a list of all NSW National Parks enter 'list'"
       puts "To exit the program enter 'exit'"
+      puts "To see the National Park regions in NSW enter 'area'"
       puts "To choose a park by its region enter 'region'"
       puts "For more information on a park enter 'info"
       puts ""
       answer = gets.strip
       if answer == "list"
           park_list
-      elsif answer == "region"
-          park_region  
       elsif answer == "info"
-          park_info             
+          park_info  
+      elsif answer == "area"
+          park_area          
+      elsif answer == "region"
+          park_region             
       end 
     end  
-    puts "Please run the program again for more options"      
+    puts "Thank you for using the Unofficial NSW National Parks App"   
+    puts ""   
   end
 end
 
