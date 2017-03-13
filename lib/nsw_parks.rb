@@ -1,4 +1,5 @@
-require '../config/environment'
+require 'nokogiri'
+require 'open-uri'
 
 class NSWParks
 
@@ -27,28 +28,9 @@ class NSWParks
   	def self.park_overview(park_no)
   		# Select the park from the list in .CLI
   		park = Nokogiri::HTML(open("#{@@all[park_no - 1].park_url}"))
-		# Brief description of the park
-		parks_overview = park.css("#content__inner div.overviewIntro p[1]").text
+		# Description of the park
+		puts parks_overview = park.css("#content__inner div.overviewIntro div.overviewIntro__readMoreText p").text
   	end
-
-  	# If the user wants to know more about the National Park e.g. camping sites
-    def self.park_highlights(park_no)
-   	  parks = Nokogiri::HTML(open("#{@park_url[park_no]}"))
-      # Parks highlights such as camping grounds
-   	  parks_highlights = parks.css("#content__inner ul.dynamicListing li")
-   	  parks_management = parks.css("#content__inner div.overviewIntro a")
-      # Link to further info website
-   	  park_link = parks_management.attribute("href").value.to_s
-      # If the selected National Park does not have any highlights listed give info website
-   	  if parks_highlights.empty?
-   	  	text = "For detailed park and fire management documents, visit the OEH website at #{park_link}"
-   	  	text.gsub(URI.regexp, '<a href="\0">\0</a>')
-   	  else
-        # Highlights heading for the highlights section
-   	  	parks.css("#content__inner .detailLeftColumn h2").text
-      	parks_highlights.each {|a| a.text}
-   	  end
-   end
 
    # Show the Regions that NSW National Parks are listed within
    def self.nsw_regions
@@ -67,7 +49,6 @@ class NSWParks
    end
 	
  end 	
-
 
 
 
