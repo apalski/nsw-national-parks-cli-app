@@ -35,7 +35,7 @@ class NSWParks
   	def self.region
   		@@all.each.with_index do |region, i|
   			park = Nokogiri::HTML(open("#{@@all[i].park_url}"))
-  		 	@@all[i].park_region = park.css("#content__inner ul.parkDetail li.parkDetail__region").text
+  		 	@@all[i].park_region = park.css("#content__inner ul.parkDetail li.parkDetail__region a[1]").text
   		end	
   	end
   	
@@ -52,26 +52,21 @@ class NSWParks
    		areas = []
 		regions = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/visit-a-park"))
 		list = regions.css("#mainParkNavJump ul li")
-		# Put out the list of Regions numerically
-		list.collect.with_index(1) do |a,i| 
-			puts "#{i}. #{a.children.text}"
-			areas << a.children.text
-		end	
+		# 
+		list.collect.with_index(1) {|a,i| areas << a.children.text}
+		region
    		array = []
-  		areas.each.with_index do |area,i|	
-  			if region_no.to_i == i + 1
-  				array << @@all.each { |region| region.park_region == areas[i]}
-  			end
-  		end
-  		puts "NSW National Parks in the #{areas[park_no.to_i - 1]} region are:"
-  		array.collect.with_index(1) {|a,i| puts "#{i}. #{a[i].name}"}
+   		#puts @@all[1].park_region
+  		array = @@all.select {|region| region.park_region == (areas[region_no.to_i - 1])}
+  		"NSW National Parks in the #{areas[region_no.to_i - 1]} region are:"
+  		array.collect.with_index(1) {|a,i| puts "#{i}. #{a.name}"}
   				
    end
 	
  end 	
 
  NSWParks.new_park
- NSWParks.park_region("1")
+ NSWParks.park_region("3")
 
 
 

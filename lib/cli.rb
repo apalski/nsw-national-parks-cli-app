@@ -9,12 +9,7 @@ class CLI
     puts ""
     puts ""
     puts "Welcome to the Unofficial NSW National Parks App"
-    background_method
     start   
-  end
-
-  def background_method
-    
   end
 
   def park_list
