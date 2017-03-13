@@ -9,6 +9,7 @@ class CLI
     puts ""
     puts "For a list of all NSW National Parks enter 'list'"
     puts "To exit the program enter 'exit'"
+    puts "To choose a park by its region enter 'region'"
     puts "For more information on a park enter 'info"
     puts ""
     start   
@@ -19,13 +20,27 @@ class CLI
     NSWParks.all.each.with_index(1) {|a,i| puts "#{i}. #{a.name}"}
   end 
 
+  def park_info
+    park_no = 0
+    puts "Enter the number for the park you are interested in:"
+    park_no = gets.strip.to_i
+    NSWParks.park_overview(park_no)
+    NSWParks.park_highlights(park_no)
+  end
+
   def start
     answer = 0
     answer = gets.strip
     while answer != "exit"
-      if answer == "list"
-        park_list
-      end  
+      case answer
+        when "list"
+          park_list
+        when "region"
+          park_region  
+        when "info"
+          park_info
+      end    
+    end    
   end
 
 
