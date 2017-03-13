@@ -48,6 +48,13 @@ class NSWParks
    	  end
    end
 
+   def self.park_region
+  		@@all.each.with_index do |region, i|
+  			park = Nokogiri::HTML(open("#{@@all[i].park_url}"))
+  		 	@@all[i].park_region = park.css("#content__inner ul.parkDetail li.parkDetail__region").text
+  		end	
+  	end
+
  end 	
 
 
