@@ -1,4 +1,4 @@
-require "../config/environment"
+require "./config/environment"
 
 class CLI
 
@@ -37,6 +37,7 @@ class CLI
   # Puts out a list of National Parks in a selected NSW Region
   def park_region
     region_no = 0
+    input = 0
     areas = park_area
     puts "Enter the number for the region you are interested in:"
     region_no = gets.strip
@@ -44,7 +45,7 @@ class CLI
     puts "The parks in the #{areas[region_no.to_i - 1]} region are:"
     array = NSWParks.park_region(region_no)
     array.each.with_index(1) {|a,i| puts "#{i}. #{a}"}
-    puts "Find your park in 'list' and then look in 'info' for more information"
+    puts "Pick your park number from 'list' and use 'info' for more information"
   end
 
   # Starts the app and gives users the available options for the app
@@ -73,6 +74,5 @@ class CLI
     puts ""   
   end
 end
-
 
 

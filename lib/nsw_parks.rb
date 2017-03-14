@@ -1,4 +1,4 @@
-require "../config/environment"
+require "./config/environment"
 
 class NSWParks
 
@@ -26,10 +26,16 @@ class NSWParks
 
   	# Allow user to access an information on a NSW National Park
   	def self.park_overview(park_no)
+  		check = ""
   		# Select the park from the list in .CLI
   		park = Nokogiri::HTML(open("#{@@all[park_no - 1].park_url}"))
 		# Description of the park
-		puts parks_overview = park.css("#content__inner div.overviewIntro div.overviewIntro__readMoreText p").text
+		check = park.css("#content__inner div.overviewIntro div.overviewIntro__readMoreText p")
+		if check.empty?
+			puts park.css("#content__inner div.overviewIntro p").text
+		else	
+			puts park.css("#content__inner div.overviewIntro div.overviewIntro__readMoreText p").text
+		end	
   	end
   	
    # Show the Regions that NSW National Parks are listed within
@@ -52,8 +58,8 @@ class NSWParks
    		when "1"
 			region = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/visit-a-park/regions/outback"))
 		 	links = region.css("#content__inner ul.detailRightColumn__linkList a")
-			array = region_sort(links)  # Remove areas that are not National Parks 
-			array
+		 	array = region_sort(links) # Remove areas that are not National Parks 
+			array	
 		when "2"
 			region = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/visit-a-park/regions/country-nsw"))	
 			links = region.css("#content__inner ul.detailRightColumn__linkList a")
@@ -90,9 +96,8 @@ class NSWParks
    # Removes areas that are not National Parks from the returned array
    def self.region_sort(links)
    		array = []
-   		links.collect {|a| array << a.text}
-		array.select! {|a| a.include?("National")}
-		array		
+   		links.collect {|a| array << a.children.text}
+		array.select! {|a| a.include?("National")}	
    end
 
    def self.park_from_region(park)
@@ -100,15 +105,12 @@ class NSWParks
    			if a.name == park
    				park_overview(i + 1)
    			end
-   		end				
-
-   				
-   end
-	
+   		end				  				
+   end	
  end 	
 
-NSWParks.new_park
-NSWParks.park_from_region("Mungo National Park")
+
+
 
 
 
