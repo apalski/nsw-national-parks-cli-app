@@ -7,7 +7,9 @@ class CLI
     NSWParks.new_park
     puts ""
     puts ""
-    puts "Welcome to the Unofficial NSW National Parks App"
+    puts " >------------------------------------------------<"
+    puts "{ Welcome to the Unofficial NSW National Parks App }"
+    puts " >------------------------------------------------<"
     start   
   end
 
@@ -50,6 +52,7 @@ class CLI
 
   # Accesses the website information for a selected NSW National Park
   def park_url
+    puts ""
     NSWParks.park_url
   end
 

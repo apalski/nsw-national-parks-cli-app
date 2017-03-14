@@ -104,11 +104,19 @@ class NSWParks
    # Accesses the website information for a selected NSW National Park
    def self.park_url
    		input = 0
-   		puts "Select the park number from 'list' and enter the number to access the website address"
+   		@@all.each.with_index(1) {|a,i| puts "#{i}. #{a.name}"}
+   		puts ""
+   		puts "Select the park number from above and enter the number to access the website address"
    		input = gets.strip.to_i
+   		puts ""
    		puts "The website address for #{@@all[input - 1].name} is:"
    		puts ""
    		puts @@all[input - 1].park_url
+   		puts ""
+   		puts "<------------------------------------------------------------------------------->"
+   		puts "Right-click on the website address and select 'open url' from the dropdown menu!!"
+   		puts "            This will open the website in your default browser                   "
+   		puts "<------------------------------------------------------------------------------->"
    end
  end 	
 
