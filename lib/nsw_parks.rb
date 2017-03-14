@@ -100,6 +100,15 @@ class NSWParks
    		links.collect {|a| array << a.children.text}
 		array.select! {|a| a.include?("National")}	
    end
+
+   def self.park_url
+   		input = 0
+   		puts "Select the park number from 'list' and enter the number to access the website address"
+   		input = gets.strip.to_i
+   		puts "The website address for #{@@all[input - 1].name} is:"
+   		puts ""
+   		puts @@all[input - 1].park_url
+   end
  end 	
 
 
