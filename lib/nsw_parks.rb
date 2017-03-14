@@ -97,8 +97,11 @@ class NSWParks
    # Removes areas that are not National Parks from the returned array
    def self.region_sort(links)
    		array = []
+   		clean = []
    		links.collect {|a| array << a.children.text}
-		array.select! {|a| a.include?("National")}	
+		array.select! {|a| a.include?("National")}
+		clean = array.collect {|a| a.strip}
+		clean
    end
 
    # Accesses the website information for a selected NSW National Park
@@ -119,6 +122,7 @@ class NSWParks
    		puts "<------------------------------------------------------------------------------->"
    end
  end 	
+
 
 
 

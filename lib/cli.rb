@@ -63,18 +63,15 @@ class CLI
       puts ""
       puts "For a list of all NSW National Parks enter 'list'"
       puts "To exit the program enter 'exit'"
-      puts "To see the National Park regions in NSW enter 'area'"
-      puts "To choose a park by its region enter 'region'"
+      puts "To see the National Park regions in NSW and choose a park by its region enter 'region'"
       puts "For more information on a park enter 'info"
-      puts "To get the website address for a National Park enter 'url'"
+      puts "To visit the website for a National Park enter 'url'"
       puts ""
       answer = gets.strip
       if answer == "list"
           park_list
       elsif answer == "info"
-          park_info  
-      elsif answer == "area"
-          park_area          
+          park_info         
       elsif answer == "region"
           park_region 
       elsif answer == "url"
