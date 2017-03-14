@@ -32,21 +32,18 @@ class NSWParks
 		# Description of the park
 		puts parks_overview = park.css("#content__inner div.overviewIntro div.overviewIntro__readMoreText p").text
   	end
-
-  	def self.region
-  		@@all.each.with_index do |region, i|
-  			park = Nokogiri::HTML(open("#{@@all[i].park_url}"))
-  		 	@@all[i].park_region = park.css("#content__inner ul.parkDetail li.parkDetail__region a[1]").text
-  		end	
-  	end
   	
    # Show the Regions that NSW National Parks are listed within
    def self.nsw_areas
-  
+   		array = []
 		regions = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/visit-a-park"))
 		list = regions.css("#mainParkNavJump ul li")
 		# Put out the list of Regions numerically
-		list.collect.with_index(1) {|a,i| puts "#{i}. #{a.children.text}"}
+		list.collect.with_index(1) do |a,i| 
+			puts "#{i}. #{a.children.text}"
+			array << a.children.text
+		end	
+		array
    end
 
    # Assign a region to each NSW National Park in the collection
@@ -54,21 +51,30 @@ class NSWParks
    		array = []
    		case region_no
    		when "1"
-			regions = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/visit-a-park/regions/outback"))
-		 	links = regions.css("#content__inner ul.detailRightColumn__linkList a")
-		 	links.collect {|a| array << a.text}
-			array.select! {|a| a.include?("National")}
-			array		
-		end		
+			region = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/visit-a-park/regions/outback"))
+		 	links = region.css("#content__inner ul.detailRightColumn__linkList a")
+			array = region_sort(links)
+			array
+		when "2"
+			region = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/visit-a-park/regions/country-nsw"))	
+			links = region.css("#content__inner ul.detailRightColumn__linkList a")
+		 	array = region_sort(links)
+			array			
+		end				
+   end
 
-   		
+   def self.region_sort(links)
+   		array = []
+   		links.collect {|a| array << a.text}
+		array.select! {|a| a.include?("National")}
+		array		
    end
 	
  end 	
 
 
 
-
+NSWParks.nsw_areas
 
 
 

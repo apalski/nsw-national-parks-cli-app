@@ -34,11 +34,14 @@ class CLI
 
   def park_region
     region_no = 0
-    park_area
+    areas = park_area
     puts "Enter the number for the region you are interested in:"
     region_no = gets.strip
+    puts ""
+    puts "The parks in the #{areas[region_no.to_i - 1]} region are:"
     array = NSWParks.park_region(region_no)
     array.each.with_index(1) {|a,i| puts "#{i}. #{a}"}
+    puts "Find your park in 'list' and then look in 'info' for more information"
   end
 
   def start
