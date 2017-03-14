@@ -6,6 +6,7 @@ class NSWParks
 	attr_accessor :name, :park_url, :park_region
 
 	@@all = []  # Collect all NSW National Parks 
+	@@areas = []
 
 	def initialize (name, park_url)
 		@name = name
@@ -41,6 +42,7 @@ class NSWParks
   	
    # Show the Regions that NSW National Parks are listed within
    def self.nsw_areas
+  
 		regions = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/visit-a-park"))
 		list = regions.css("#mainParkNavJump ul li")
 		# Put out the list of Regions numerically
@@ -49,24 +51,21 @@ class NSWParks
 
    # Assign a region to each NSW National Park in the collection
    def self.park_region(region_no)
-   		areas = []
-		regions = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/visit-a-park"))
-		list = regions.css("#mainParkNavJump ul li")
-		# 
-		list.collect.with_index(1) {|a,i| areas << a.children.text}
-		region
    		array = []
-   		#puts @@all[1].park_region
-  		array = @@all.select {|region| region.park_region == (areas[region_no.to_i - 1])}
-  		"NSW National Parks in the #{areas[region_no.to_i - 1]} region are:"
-  		array.collect.with_index(1) {|a,i| puts "#{i}. #{a.name}"}
-  				
+   		case region_no
+   		when "1"
+			regions = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/visit-a-park/regions/outback"))
+		 	links = regions.css("#content__inner ul.detailRightColumn__linkList a")
+		 	links.collect {|a| array << a.text}
+			array.select! {|a| a.include?("National")}
+			array		
+		end		
+
+   		
    end
 	
  end 	
 
- NSWParks.new_park
- NSWParks.park_region("3")
 
 
 

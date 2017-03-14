@@ -38,7 +38,7 @@ class CLI
     puts "Enter the number for the region you are interested in:"
     region_no = gets.strip
     array = NSWParks.park_region(region_no)
-    array.each.with_index {|a,i| puts "#{i}. #{a}"}
+    array.each.with_index(1) {|a,i| puts "#{i}. #{a}"}
   end
 
   def start
