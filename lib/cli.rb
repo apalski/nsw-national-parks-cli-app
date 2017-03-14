@@ -1,6 +1,4 @@
-#require '../config/environment'
-#require_relative '../lib/nsw_parks'
-require 'background_lite'
+require "./config/environment"
 
 class CLI
 
