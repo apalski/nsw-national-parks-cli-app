@@ -126,15 +126,21 @@ class NSWParks
    		puts ""
    		puts "Select the park number from above and enter the number to access the website address"
    		input = gets.strip.to_i
+   		while !(input.is_a? Integer) || input < 1 || input > @@all.length
+   			@@all.each.with_index(1) {|a,i| puts "#{i}. #{a.name}"}
+   			puts ""
+   			puts "Please enter a park number from the list above:"
+   			input = gets.strip.to_i
+   		end	
    		puts ""
    		puts "The website address for #{@@all[input - 1].name} is:"
    		puts ""
    		puts @@all[input - 1].park_url
    		puts ""
-   		puts "<------------------------------------------------------------------------------->"
+   		puts "<--------------------------------------------------------------------------------------->"
    		puts "Right-click on the website address above and select 'open url' from the dropdown menu!!"
    		puts "            This will open the website in your default browser                   "
-   		puts "<------------------------------------------------------------------------------->"
+   		puts "<--------------------------------------------------------------------------------------->"
    end
  end 	
 
