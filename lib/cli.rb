@@ -51,21 +51,18 @@ class CLI
     array.each.with_index(1) {|a,i| puts "#{i}. #{a}"}
     puts ""
     puts "Enter your park number from this list for more information:"
-    input = gets.strip.to_i
-    if !integer?(input)
+    input = gets.strip.to_i   
+    while input < 0 || input > array.length
       array = NSWParks.park_region(region_no)
       array.each.with_index(1) {|a,i| puts "#{i}. #{a}"}
+      puts ""
       puts "Please enter one of the park numbers in the list"
       input = gets.strip.to_i
-    elsif input < 0 || input > NSWParks.all.length
-      puts "Please enter one of the park numbers in the list" 
-      input = gets.strip.to_i
-    else  
-      puts ""
-      puts "Information for #{array[input - 1]}:"
-      puts "----------------------------------------------------------------------------------------"
-      NSWParks.park_from_region(array[input - 1])
-    end  
+    end
+    puts ""
+    puts "Information for #{array[input - 1]}:"
+    puts "----------------------------------------------------------------------------------------"
+    NSWParks.park_from_region(array[input - 1])  
   end
 
   # Accesses the website information for a selected NSW National Park
