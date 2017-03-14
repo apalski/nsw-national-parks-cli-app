@@ -44,16 +44,22 @@ class CLI
     input = 0
     areas = park_area
     puts "Enter the number for the region you are interested in:"
-    region_no = gets.strip
+    region_no = gets.strip.to_i
+    while region_no < 0 || region_no > areas.length
+      park_area
+      puts ""
+      puts "Please enter one of the regions in the list"
+      region_no = gets.strip.to_i
+    end
     puts ""
     puts "The parks in the #{areas[region_no.to_i - 1]} region are:"
-    array = NSWParks.park_region(region_no)
+    array = NSWParks.park_region(region_no.to_s)
     array.each.with_index(1) {|a,i| puts "#{i}. #{a}"}
     puts ""
     puts "Enter your park number from this list for more information:"
     input = gets.strip.to_i   
     while input < 0 || input > array.length
-      array = NSWParks.park_region(region_no)
+      array = NSWParks.park_region(region_no.to_s)
       array.each.with_index(1) {|a,i| puts "#{i}. #{a}"}
       puts ""
       puts "Please enter one of the park numbers in the list"
