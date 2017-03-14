@@ -44,8 +44,8 @@ class CLI
     input = 0
     areas = park_area
     puts "Enter the number for the region you are interested in:"
-    region_no = gets.strip.to_i
-    while region_no < 0 || region_no > areas.length
+    region_no = gets.strip.to_i    
+    while !(region_no.is_a? Integer) || region_no < 1 || region_no > areas.length
       park_area
       puts ""
       puts "Please enter one of the regions in the list"
@@ -58,7 +58,7 @@ class CLI
     puts ""
     puts "Enter your park number from this list for more information:"
     input = gets.strip.to_i   
-    while input < 0 || input > array.length
+    while !(input.is_a? Integer) || input < 1 || input > array.length
       array = NSWParks.park_region(region_no.to_s)
       array.each.with_index(1) {|a,i| puts "#{i}. #{a}"}
       puts ""
