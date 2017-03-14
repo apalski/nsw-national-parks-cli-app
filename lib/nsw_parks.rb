@@ -31,6 +31,7 @@ class NSWParks
   		park = Nokogiri::HTML(open("#{@@all[park_no - 1].park_url}"))
 		# Description of the park
 		check = park.css("#content__inner div.overviewIntro div.overviewIntro__readMoreText p")
+		# If there is no overview available display alternative text
 		if check.empty?
 			puts park.css("#content__inner div.overviewIntro p").text
 		else	

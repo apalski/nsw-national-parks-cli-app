@@ -58,6 +58,7 @@ class CLI
       puts "To see the National Park regions in NSW enter 'area'"
       puts "To choose a park by its region enter 'region'"
       puts "For more information on a park enter 'info"
+      puts "To get the website address for a National Park enter 'url'"
       puts ""
       answer = gets.strip
       if answer == "list"
@@ -67,7 +68,9 @@ class CLI
       elsif answer == "area"
           park_area          
       elsif answer == "region"
-          park_region             
+          park_region 
+      elsif answer == "url"
+          park_url                                    
       end 
     end  
     puts "Thank you for using the Unofficial NSW National Parks App"   
