@@ -59,7 +59,32 @@ class NSWParks
 			region = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/visit-a-park/regions/country-nsw"))	
 			links = region.css("#content__inner ul.detailRightColumn__linkList a")
 		 	array = region_sort(links)
-			array			
+			array	
+		when "3"
+			region = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/visit-a-park/regions/murray-riverina"))	
+			links = region.css("#content__inner ul.detailRightColumn__linkList a")
+		 	array = region_sort(links)
+			array	
+		when "4"
+			region = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/visit-a-park/regions/north-coast"))	
+			links = region.css("#content__inner ul.detailRightColumn__linkList a")
+		 	array = region_sort(links)
+			array	
+		when "5"
+			region = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/visit-a-park/regions/south-coast"))	
+			links = region.css("#content__inner ul.detailRightColumn__linkList a")
+		 	array = region_sort(links)
+			array
+		when "6"
+			region = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/visit-a-park/regions/sydney-and-surrounds"))	
+			links = region.css("#content__inner ul.detailRightColumn__linkList a")
+		 	array = region_sort(links)
+			array	
+		when "7"
+			region = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/visit-a-park/regions/snowy-mountains"))	
+			links = region.css("#content__inner ul.detailRightColumn__linkList a")
+		 	array = region_sort(links)
+			array						
 		end				
    end
 
@@ -73,8 +98,6 @@ class NSWParks
  end 	
 
 
-
-NSWParks.nsw_areas
 
 
 
