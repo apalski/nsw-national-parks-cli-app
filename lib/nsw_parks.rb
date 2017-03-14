@@ -100,14 +100,6 @@ class NSWParks
    		links.collect {|a| array << a.children.text}
 		array.select! {|a| a.include?("National")}	
    end
-
-   def self.park_from_region(park)
-   		@@all.each.with_index do |a,i| 
-   			if a.name == park
-   				park_overview(i + 1)
-   			end
-   		end				  				
-   end	
  end 	
 
 
