@@ -20,6 +20,7 @@ class CLI
 
   # Puts out information on a selected NSW National Park
   def park_info
+    park_list
     park_no = 0
     puts ""
     puts "Enter the number for the park you are interested in:"
@@ -85,6 +86,7 @@ class CLI
           park_url                                    
       end 
     end  
+    puts ""
     puts "Thank you for using the Unofficial NSW National Parks App"   
     puts ""   
   end
