@@ -104,6 +104,13 @@ class NSWParks
 		clean
    end
 
+   def self.park_from_region(park)
+ 		@@all.each.with_index do |a,i| 
+ 			if a.name == park
+ 				park_overview(i + 1)
+ 			end
+		end				
+
    # Accesses the website information for a selected NSW National Park
    def self.park_url
    		input = 0
