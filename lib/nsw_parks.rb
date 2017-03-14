@@ -1,4 +1,4 @@
-require "./config/environment"
+require "../config/environment"
 
 class NSWParks
 
@@ -94,10 +94,21 @@ class NSWParks
 		array.select! {|a| a.include?("National")}
 		array		
    end
+
+   def self.park_from_region(park)
+   		@@all.each.with_index do |a,i| 
+   			if a.name == park
+   				park_overview(i + 1)
+   			end
+   		end				
+
+   				
+   end
 	
  end 	
 
-
+NSWParks.new_park
+NSWParks.park_from_region("Mungo National Park")
 
 
 
