@@ -25,6 +25,12 @@ class CLI
     puts ""
     puts "Enter the number for the park you are interested in:"
     park_no = gets.strip.to_i
+    while !(park_no.is_a? Integer) || park_no < 1 || park_no > NSWParks.all.length
+      park_list
+      puts ""
+      puts "Please enter a park number from the above list:"
+      park_no = gets.strip.to_i
+    end  
     puts ""
     puts NSWParks.all[park_no - 1].name
     puts ""
