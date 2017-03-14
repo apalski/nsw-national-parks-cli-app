@@ -101,6 +101,7 @@ class NSWParks
 		array.select! {|a| a.include?("National")}	
    end
 
+   # Accesses the website information for a selected NSW National Park
    def self.park_url
    		input = 0
    		puts "Select the park number from 'list' and enter the number to access the website address"

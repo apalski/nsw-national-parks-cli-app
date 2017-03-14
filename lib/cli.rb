@@ -48,6 +48,11 @@ class CLI
     puts "Pick your park number from 'list' and use 'info' for more information"
   end
 
+  # Accesses the website information for a selected NSW National Park
+  def park_url
+    NSWParks.park_url
+  end
+
   # Starts the app and gives users the available options for the app
   def start
     answer = 0 
