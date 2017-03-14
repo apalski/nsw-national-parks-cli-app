@@ -37,6 +37,7 @@ class NSWParks
 		else	
 			puts park.css("#content__inner div.overviewIntro div.overviewIntro__readMoreText p").text
 		end	
+		puts "----------------------------------------------------------------------------------------"
   	end
   	
    # Show the Regions that NSW National Parks are listed within
@@ -109,7 +110,8 @@ class NSWParks
  			if a.name == park
  				park_overview(i + 1)
  			end
-		end				
+		end	
+	end				
 
    # Accesses the website information for a selected NSW National Park
    def self.park_url

@@ -27,6 +27,7 @@ class CLI
     puts ""
     puts NSWParks.all[park_no - 1].name
     puts ""
+    puts "----------------------------------------------------------------------------------------"
     NSWParks.park_overview(park_no)
   end
 
@@ -47,7 +48,13 @@ class CLI
     puts "The parks in the #{areas[region_no.to_i - 1]} region are:"
     array = NSWParks.park_region(region_no)
     array.each.with_index(1) {|a,i| puts "#{i}. #{a}"}
-    puts "Pick your park number from 'list' and use 'info' for more information"
+    puts ""
+    puts "Enter your park number from this list for more information:"
+    input = gets.strip.to_i
+    puts ""
+    puts "Information for #{array[input - 1]}:"
+    puts "----------------------------------------------------------------------------------------"
+    NSWParks.park_from_region(array[input - 1])
   end
 
   # Accesses the website information for a selected NSW National Park
