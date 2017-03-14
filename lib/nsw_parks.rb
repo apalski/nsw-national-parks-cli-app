@@ -34,6 +34,12 @@ class NSWParks
 		# If there is no overview available display alternative text
 		if check.empty?
 			puts park.css("#content__inner div.overviewIntro p").text
+			link = park.css("#content__inner div.overviewIntro a")
+			puts "The OEH website can be found at #{link.attribute("href").value}"
+			puts "<------------------------------------------------------------------------------->"
+	   		puts "Right-click on the website address above and select 'open url' from the dropdown menu!!"
+	   		puts "            This will open the website in your default browser                   "
+	   		puts "<------------------------------------------------------------------------------->"
 		else	
 			puts park.css("#content__inner div.overviewIntro div.overviewIntro__readMoreText p").text
 		end	
@@ -126,7 +132,7 @@ class NSWParks
    		puts @@all[input - 1].park_url
    		puts ""
    		puts "<------------------------------------------------------------------------------->"
-   		puts "Right-click on the website address and select 'open url' from the dropdown menu!!"
+   		puts "Right-click on the website address above and select 'open url' from the dropdown menu!!"
    		puts "            This will open the website in your default browser                   "
    		puts "<------------------------------------------------------------------------------->"
    end
