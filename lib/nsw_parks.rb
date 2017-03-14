@@ -24,7 +24,7 @@ class NSWParks
 	    park.collect {|a| new(a.text.strip, a.attribute("href").value)}
   	end 	
 
-  	# Allow user to access an overview of a NSW National Park
+  	# Allow user to access an information on a NSW National Park
   	def self.park_overview(park_no)
   		# Select the park from the list in .CLI
   		park = Nokogiri::HTML(open("#{@@all[park_no - 1].park_url}"))

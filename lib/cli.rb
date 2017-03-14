@@ -2,6 +2,7 @@ require "./config/environment"
 
 class CLI
 
+  # Loads all the NSW National Parks, puts out welcome message and starts the app
   def call
     NSWParks.new_park
     puts ""
@@ -10,10 +11,12 @@ class CLI
     start   
   end
 
+  # Puts out a list of all NSW National Parks
   def park_list
     NSWParks.all.each.with_index(1) {|a,i| puts "#{i}. #{a.name}"}
   end 
 
+  # Puts out information on a selected NSW National Park
   def park_info
     park_no = 0
     puts ""
@@ -25,11 +28,13 @@ class CLI
     NSWParks.park_overview(park_no)
   end
 
+  # Puts out a list of the NSW Regions that contain National Parks
   def park_area
     puts ""
     NSWParks.nsw_areas
   end
 
+  # Puts out a list of National Parks in a selected NSW Region
   def park_region
     region_no = 0
     areas = park_area
@@ -42,6 +47,7 @@ class CLI
     puts "Find your park in 'list' and then look in 'info' for more information"
   end
 
+  # Starts the app and gives users the available options for the app
   def start
     answer = 0 
     while answer != "exit"
