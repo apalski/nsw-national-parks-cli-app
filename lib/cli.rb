@@ -145,5 +145,3 @@ class CLI
     puts ""   
   end
 end
-
-
