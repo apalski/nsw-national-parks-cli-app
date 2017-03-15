@@ -142,6 +142,15 @@ class NSWParks
    		puts "            This will open the website in your default browser                   "
    		puts "<--------------------------------------------------------------------------------------->"
    end
+
+   def self.park_map
+   		puts "http://www.nationalparks.nsw.gov.au/nsw-state-map"
+   		puts ""
+   		puts "<--------------------------------------------------------------------------------------->"
+   		puts "Right-click on the website address above and select 'open url' from the dropdown menu!!"
+   		puts "            This will open the website in your default browser                   "
+   		puts "<--------------------------------------------------------------------------------------->"
+   end
  end 	
 
 

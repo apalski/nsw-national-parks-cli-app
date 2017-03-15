@@ -103,7 +103,7 @@ class CLI
       puts "To exit the program enter 'exit'"
       puts "To see the National Park regions in NSW and choose a park by its region enter 'region'"
       puts "For more information on a park enter 'info"
-      puts "To access a map of all National Parks in NSW enter 'map'"
+      puts "To access a interactive map of all National Parks in NSW enter 'map'"
       puts "To visit the website for a National Park enter 'url'"
       puts ""
       answer = gets.strip
