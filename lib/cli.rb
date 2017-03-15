@@ -133,7 +133,9 @@ class CLI
       end 
     end  
     puts ""
-    puts "Thank you for using the Unofficial NSW National Parks App"   
+    puts "---------------------------------------------------------"
+    puts "Thank you for using the Unofficial NSW National Parks App"  
+    puts "---------------------------------------------------------" 
     puts ""   
   end
 end

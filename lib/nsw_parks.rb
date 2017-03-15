@@ -37,8 +37,8 @@ class NSWParks
 			link = park.css("#content__inner div.overviewIntro a")
 			puts "The OEH website can be found at #{link.attribute("href").value}"
 			puts "<------------------------------------------------------------------------------->"
-	   		puts "Right-click on the website address above and select 'open url' from the dropdown menu!!"
-	   		puts "            This will open the website in your default browser                   "
+	   		puts " Right-click or Control-click on the website address above and select 'open url'" 
+	   		puts "  from the dropdown menu!! This will open the website in your default browser  "
 	   		puts "<------------------------------------------------------------------------------->"
 		else	
 			puts park.css("#content__inner div.overviewIntro div.overviewIntro__readMoreText p").text
@@ -129,7 +129,9 @@ class NSWParks
    		while !(input.is_a? Integer) || input < 1 || input > @@all.length
    			@@all.each.with_index(1) {|a,i| puts "#{i}. #{a.name}"}
    			puts ""
+   			puts "----------------------------------------------"
    			puts "Please enter a park number from the list above:"
+   			puts "----------------------------------------------"
    			input = gets.strip.to_i
    		end	
    		puts ""
@@ -137,19 +139,19 @@ class NSWParks
    		puts ""
    		puts @@all[input - 1].park_url
    		puts ""
-   		puts "<--------------------------------------------------------------------------------------->"
-   		puts "Right-click on the website address above and select 'open url' from the dropdown menu!!"
-   		puts "            This will open the website in your default browser                   "
-   		puts "<--------------------------------------------------------------------------------------->"
+   		puts "<------------------------------------------------------------------------------->"
+   		puts " Right-click or Control-click on the website address above and select 'open url'" 
+   		puts "  from the dropdown menu!! This will open the website in your default browser  "
+   		puts "<------------------------------------------------------------------------------->"
    end
 
    def self.park_map
    		puts "http://www.nationalparks.nsw.gov.au/nsw-state-map"
    		puts ""
-   		puts "<--------------------------------------------------------------------------------------->"
-   		puts "Right-click on the website address above and select 'open url' from the dropdown menu!!"
-   		puts "            This will open the website in your default browser                   "
-   		puts "<--------------------------------------------------------------------------------------->"
+   		puts "<------------------------------------------------------------------------------->"
+   		puts " Right-click or Control-click on the website address above and select 'open url'" 
+   		puts "  from the dropdown menu!! This will open the website in your default browser  "
+   		puts "<------------------------------------------------------------------------------->"
    end
 
    def self.park_guide
@@ -157,10 +159,10 @@ class NSWParks
    		link = page.css("#headerNavBottom nav ul li#mainNav__about .box ul li[5] a")
    		puts link.attribute("href").value
    		puts ""
-   		puts "<--------------------------------------------------------------------------------------->"
-   		puts "Right-click on the website address above and select 'open url' from the dropdown menu!!"
-   		puts "            This will open the website in your default browser                   "
-   		puts "<--------------------------------------------------------------------------------------->"
+   		puts "<------------------------------------------------------------------------------->"
+   		puts " Right-click or Control-click on the website address above and select 'open url'" 
+   		puts "  from the dropdown menu!! This will open the website in your default browser  "
+   		puts "<------------------------------------------------------------------------------->"
    	end	
  end 	
 
