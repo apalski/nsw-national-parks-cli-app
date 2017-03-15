@@ -1,6 +1,6 @@
 require "./config/environment"
 
-class CLI
+class NSWParks::CLI
 
   # Loads all the NSW National Parks, puts out welcome message and starts the app
   def call
