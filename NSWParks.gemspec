@@ -5,6 +5,7 @@ require 'NSWParks/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "NSWParks"
+  spec.d
   spec.version       = NSWParks::VERSION
   spec.authors       = ["Annette Drapalski"]
   spec.email         = ["annette.drapalski@gmail.com"]
@@ -23,12 +24,16 @@ Gem::Specification.new do |spec|
       "public gem pushes."
   end
 
-  spec.files         = `git ls-files -z`.split("\x0").reject do |f|
-    f.match(%r{^(test|spec|features)/})
+  spec.files         = `git ls-files`.split($/)
+  #spec.files         = `git ls-files -z`.split("\x0").reject do |f|   ?????
+   # f.match(%r{^(test|spec|features)/})
   end
-  spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  #spec.bindir        = "exe" ????
+  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  #spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }  ??????
   spec.require_paths = ["lib"]
+
+  #spec.add_dependency 'engtagger' ???? Do I have any to add?
 
   spec.add_development_dependency "bundler", "~> 1.14"
   spec.add_development_dependency "rake", "~> 10.0"

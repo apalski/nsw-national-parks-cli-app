@@ -12,35 +12,35 @@ class NSWParks::CLI
     start   
   end
 
-  # Puts out a list of all NSW National Parks
+  # Puts out a numerical list of all NSW National Parks
   def park_list
-    NSWParks.all.each.with_index(1) {|a,i| puts "#{i}. #{a.name}"}
+    NSWParks.all.each.with_index(1) {|a,i| puts "#{i}. #{a.name}"} # Start array index from 1 not 0
   end 
 
-  # Puts out information on a selected NSW National Park
+  # Puts out information on a selected NSW National Park using #park_list
   def park_info
     park_list
     park_no = 0
     puts ""
     puts "Enter the number for the park you are interested in:"
     park_no = gets.strip.to_i
-    # Validate user input - input must be numerical and exist in the list
+    # Validate user input - input must be an integer and exist in the list
     while !(park_no.is_a? Integer) || park_no < 1 || park_no > NSWParks.all.length
       park_list
       puts ""
       puts "-----------------------------------------------"
-      puts "Please enter a park number from the list above:"
+      puts "Please enter a park number from the list above:"  # Prompt user to enter again
       puts "-----------------------------------------------"
       park_no = gets.strip.to_i
     end  
     puts ""
-    puts NSWParks.all[park_no - 1].name
+    puts NSWParks.all[park_no - 1].name  # Gives returned park info a heading of the park name
     puts ""
     puts "----------------------------------------------------------------------------------------"
-    NSWParks.park_overview(park_no)
+    NSWParks.park_overview(park_no)  # Puts out park info using NSWParks #park_overview
   end
 
-  # Puts out a list of the NSW Regions that contain National Parks
+  # Puts out a list of the NSW Regions that contain National Parks using NSWParks #nsw_areas
   def park_area
     puts ""
     NSWParks.nsw_areas
@@ -58,7 +58,7 @@ class NSWParks::CLI
       park_area
       puts ""
       puts "--------------------------------------------------"
-      puts "Please enter one of the regions in the list above:"
+      puts "Please enter one of the regions in the list above:"  # Prompt user to enter again
       puts "--------------------------------------------------"      
       region_no = gets.strip.to_i
     end
@@ -75,7 +75,7 @@ class NSWParks::CLI
       array.each.with_index(1) {|a,i| puts "#{i}. #{a}"}
       puts ""
       puts "---------------------------------------------------------"
-      puts "Please enter one of the park numbers from the list above:"
+      puts "Please enter one of the park numbers from the list above:"  # Prompt user to enter again
       puts "---------------------------------------------------------"
       input = gets.strip.to_i
     end
@@ -133,7 +133,7 @@ class NSWParks::CLI
       elsif answer != "exit"
           puts ""
           puts "---------------------------------------------"
-          puts "Please enter one of the options from the list"   
+          puts "Please enter one of the options from the list"  # Prompt user to enter again 
           puts "---------------------------------------------"                                   
       end 
     end  
