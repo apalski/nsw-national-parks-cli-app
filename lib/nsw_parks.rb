@@ -4,7 +4,7 @@ class NSWParks
 
 	attr_accessor :name, :park_url, :park_region
 
-	@@all = []  # Collect all NSW National Parks 
+	@@all = []  # Collects all NSW National Parks 
 	@@areas = []
 
 	def initialize (name, park_url)
@@ -24,14 +24,14 @@ class NSWParks
 	    park.collect {|a| new(a.text.strip, a.attribute("href").value)}
   	end 	
 
-  	# Allow user to access an information on a NSW National Park
+  	# Allow users to access information on any NSW National Park
   	def self.park_overview(park_no)
   		check = ""
-  		# Select the park from the list in .CLI
+  		# Select the park from the list in @@all using the park's park_url attribute
   		park = Nokogiri::HTML(open("#{@@all[park_no - 1].park_url}"))
 		# Description of the park
 		check = park.css("#content__inner div.overviewIntro div.overviewIntro__readMoreText p")
-		# If there is no overview available display alternative text
+		# If there is no overview available display alternative text for the park
 		if check.empty?
 			puts park.css("#content__inner div.overviewIntro p").text
 			link = park.css("#content__inner div.overviewIntro a")
@@ -40,7 +40,7 @@ class NSWParks
 	   		puts " Right-click or Control-click on the website address above and select 'open url'" 
 	   		puts "  from the dropdown menu!! This will open the website in your default browser  "
 	   		puts "<------------------------------------------------------------------------------->"
-		else	
+		else  # If overview available put that out to the user
 			puts park.css("#content__inner div.overviewIntro div.overviewIntro__readMoreText p").text
 		end	
 		puts "----------------------------------------------------------------------------------------"
@@ -63,37 +63,37 @@ class NSWParks
    def self.park_region(region_no)
    		array = []
    		case region_no
-   		when "1"
+   		when "1"  # Outback Region
 			region = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/visit-a-park/regions/outback"))
 		 	links = region.css("#content__inner ul.detailRightColumn__linkList a")
 		 	array = region_sort(links) # Remove areas that are not National Parks 
 			array	
-		when "2"
+		when "2"  # Country NSW Region
 			region = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/visit-a-park/regions/country-nsw"))	
 			links = region.css("#content__inner ul.detailRightColumn__linkList a")
 		 	array = region_sort(links) # Remove areas that are not National Parks 
 			array	
-		when "3"
+		when "3"  # Murray Riverina Region
 			region = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/visit-a-park/regions/murray-riverina"))	
 			links = region.css("#content__inner ul.detailRightColumn__linkList a")
 		 	array = region_sort(links)  # Remove areas that are not National Parks 
 			array	
-		when "4"
+		when "4"  # North Coast Region
 			region = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/visit-a-park/regions/north-coast"))	
 			links = region.css("#content__inner ul.detailRightColumn__linkList a")
 		 	array = region_sort(links)  # Remove areas that are not National Parks 
 			array	
-		when "5"
+		when "5"  # South Coast Region
 			region = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/visit-a-park/regions/south-coast"))	
 			links = region.css("#content__inner ul.detailRightColumn__linkList a")
 		 	array = region_sort(links)  # Remove areas that are not National Parks 
 			array
-		when "6"
+		when "6"  # Sydney and Surrounds Region
 			region = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/visit-a-park/regions/sydney-and-surrounds"))	
 			links = region.css("#content__inner ul.detailRightColumn__linkList a")
 		 	array = region_sort(links)  # Remove areas that are not National Parks 
 			array	
-		when "7"
+		when "7"  # Snowy Mountains Region
 			region = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/visit-a-park/regions/snowy-mountains"))	
 			links = region.css("#content__inner ul.detailRightColumn__linkList a")
 		 	array = region_sort(links)  # Remove areas that are not National Parks 
@@ -107,12 +107,15 @@ class NSWParks
    		clean = []
    		links.collect {|a| array << a.children.text}
 		array.select! {|a| a.include?("National")}
+		# Remove leading and trailing white space from the park names
 		clean = array.collect {|a| a.strip}
 		clean
    end
 
+   # Return overview for a park using its listing under its region
    def self.park_from_region(park)
  		@@all.each.with_index do |a,i| 
+ 			# Find the park in region in the @@all array and return its overview
  			if a.name == park
  				park_overview(i + 1)
  			end
@@ -126,6 +129,7 @@ class NSWParks
    		puts ""
    		puts "Select the park number from above and enter the number to access the website address"
    		input = gets.strip.to_i
+   		# Validate user input - input must be numerical and exist in the list
    		while !(input.is_a? Integer) || input < 1 || input > @@all.length
    			@@all.each.with_index(1) {|a,i| puts "#{i}. #{a.name}"}
    			puts ""
@@ -138,15 +142,16 @@ class NSWParks
    		puts "The website address for #{@@all[input - 1].name} is:"
    		puts ""
    		puts @@all[input - 1].park_url
-   		puts ""
+   		puts ""  
    		puts "<------------------------------------------------------------------------------->"
    		puts " Right-click or Control-click on the website address above and select 'open url'" 
    		puts "  from the dropdown menu!! This will open the website in your default browser  "
    		puts "<------------------------------------------------------------------------------->"
    end
 
+   # Provides user with a link to the map and instructions to open the link in their browser
    def self.park_map
-   		puts "http://www.nationalparks.nsw.gov.au/nsw-state-map"
+   		puts "http://www.nationalparks.nsw.gov.au/nsw-state-map" # No url to scrape - hidden
    		puts ""
    		puts "<------------------------------------------------------------------------------->"
    		puts " Right-click or Control-click on the website address above and select 'open url'" 
@@ -154,6 +159,7 @@ class NSWParks
    		puts "<------------------------------------------------------------------------------->"
    end
 
+   # Provides user with a link to guides and instructions to open the link in their browser
    def self.park_guide
    		page = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au"))	
    		link = page.css("#headerNavBottom nav ul li#mainNav__about .box ul li[5] a")

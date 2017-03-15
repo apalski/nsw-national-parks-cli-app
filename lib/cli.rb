@@ -25,6 +25,7 @@ class CLI
     puts ""
     puts "Enter the number for the park you are interested in:"
     park_no = gets.strip.to_i
+    # Validate user input - input must be numerical and exist in the list
     while !(park_no.is_a? Integer) || park_no < 1 || park_no > NSWParks.all.length
       park_list
       puts ""
@@ -52,7 +53,8 @@ class CLI
     input = 0
     areas = park_area
     puts "Enter the number for the region you are interested in:"
-    region_no = gets.strip.to_i    
+    region_no = gets.strip.to_i 
+    # Validate user input - input must be numerical and exist in the list   
     while !(region_no.is_a? Integer) || region_no < 1 || region_no > areas.length
       park_area
       puts ""
@@ -67,7 +69,8 @@ class CLI
     array.each.with_index(1) {|a,i| puts "#{i}. #{a}"}
     puts ""
     puts "Enter your park number from this list for more information:"
-    input = gets.strip.to_i   
+    input = gets.strip.to_i 
+    # Validate user input - input must be numerical and exist in the list  
     while !(input.is_a? Integer) || input < 1 || input > array.length
       array = NSWParks.park_region(region_no.to_s)
       array.each.with_index(1) {|a,i| puts "#{i}. #{a}"}
@@ -89,11 +92,13 @@ class CLI
     NSWParks.park_url
   end
 
+  # Accesses the website information for an interactive map of all parks
   def park_map
     puts ""
     NSWParks.park_map
   end
 
+  # Accesses the website information for free park guide downloads
   def park_guide
     puts ""
     NSWParks.park_guide
@@ -124,7 +129,8 @@ class CLI
       elsif answer == "map"
           park_map  
       elsif answer == "guide"
-          park_guide             
+          park_guide   
+      # Validates the user input              
       elsif answer != "exit"
           puts ""
           puts "---------------------------------------------"
