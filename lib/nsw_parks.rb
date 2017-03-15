@@ -151,6 +151,17 @@ class NSWParks
    		puts "            This will open the website in your default browser                   "
    		puts "<--------------------------------------------------------------------------------------->"
    end
+
+   def self.park_guide
+   		page = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au"))	
+   		link = page.css("#headerNavBottom nav ul li#mainNav__about .box ul li[5] a")
+   		puts link.attribute("href").value
+   		puts ""
+   		puts "<--------------------------------------------------------------------------------------->"
+   		puts "Right-click on the website address above and select 'open url' from the dropdown menu!!"
+   		puts "            This will open the website in your default browser                   "
+   		puts "<--------------------------------------------------------------------------------------->"
+   	end	
  end 	
 
 
