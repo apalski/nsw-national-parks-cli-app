@@ -83,6 +83,11 @@ class CLI
     NSWParks.park_url
   end
 
+  def park_map
+    puts ""
+    NSWParks.park_map
+  end
+
   # Starts the app and gives users the available options for the app
   def start
     answer = 0 
@@ -92,6 +97,7 @@ class CLI
       puts "To exit the program enter 'exit'"
       puts "To see the National Park regions in NSW and choose a park by its region enter 'region'"
       puts "For more information on a park enter 'info"
+      puts "To access a map of all National Parks in NSW enter 'map'"
       puts "To visit the website for a National Park enter 'url'"
       puts ""
       answer = gets.strip
@@ -102,8 +108,10 @@ class CLI
       elsif answer == "region"
           park_region 
       elsif answer == "url"
-          park_url  
-      else
+          park_url
+      elsif answer == "map"
+          park_map          
+      elsif answer != "exit"
           puts ""
           puts "---------------------------------------------"
           puts "Please enter one of the options from the list"   
