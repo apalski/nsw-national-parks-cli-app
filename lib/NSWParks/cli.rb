@@ -3,7 +3,7 @@ class NSWParks::CLI
 
   # Loads all the NSW National Parks, puts out welcome message and starts the app
   def call
-    NSWParks.new_park
+    Nsw_parks.new_park
     puts ""
     puts ""
     puts " >------------------------------------------------<"
@@ -14,7 +14,7 @@ class NSWParks::CLI
 
   # Puts out a numerical list of all NSW National Parks
   def park_list
-    NSWParks.all.each.with_index(1) {|a,i| puts "#{i}. #{a.name}"} # Start array index from 1 not 0
+    Nsw_parks.all.each.with_index(1) {|a,i| puts "#{i}. #{a.name}"} # Start array index from 1 not 0
   end 
 
   # Puts out information on a selected NSW National Park using #park_list
@@ -25,7 +25,7 @@ class NSWParks::CLI
     puts "Enter the number for the park you are interested in:"
     park_no = gets.strip.to_i
     # Validate user input - input must be an integer and exist in the list
-    while !(park_no.is_a? Integer) || park_no < 1 || park_no > NSWParks.all.length
+    while !(park_no.is_a? Integer) || park_no < 1 || park_no > Nsw_parks.all.length
       park_list
       puts ""
       puts "-----------------------------------------------"
@@ -34,23 +34,23 @@ class NSWParks::CLI
       park_no = gets.strip.to_i
     end  
     puts ""
-    puts NSWParks.all[park_no - 1].name  # Gives returned park info a heading of the park name
+    puts Nsw_parks.all[park_no - 1].name  # Gives returned park info a heading of the park name
     puts ""
     puts "----------------------------------------------------------------------------------------"
-    NSWParks.park_overview(park_no)  # Puts out park info using NSWParks #park_overview
+    Nsw_parks.park_overview(park_no)  # Puts out park info using Nsw_parks #park_overview
   end
 
-  # Puts out a list of the NSW Regions that contain National Parks using NSWParks #nsw_areas
+  # Puts out a list of the NSW Regions that contain National Parks using Nsw_parks #nsw_areas
   def park_area
     puts ""
-    NSWParks.nsw_areas
+    Nsw_parks.nsw_areas
   end
 
   # Puts out a list of National Parks in a selected NSW Region
   def park_region
     region_no = 0
     input = 0
-    areas = park_area
+    areas = park_area  # Use #park_area to output list of NSW Regions
     puts "Enter the number for the region you are interested in:"
     region_no = gets.strip.to_i 
     # Validate user input - input must be numerical and exist in the list   
@@ -64,14 +64,14 @@ class NSWParks::CLI
     end
     puts ""
     puts "The parks in the #{areas[region_no.to_i - 1]} region are:"
-    array = NSWParks.park_region(region_no.to_s)
-    array.each.with_index(1) {|a,i| puts "#{i}. #{a}"}
+    array = Nsw_parks.park_region(region_no.to_s)
+    array.each.with_index(1) {|a,i| puts "#{i}. #{a}"} # Puts parks in region using Nsw_parks
     puts ""
     puts "Enter your park number from this list for more information:"
     input = gets.strip.to_i 
     # Validate user input - input must be numerical and exist in the list  
     while !(input.is_a? Integer) || input < 1 || input > array.length
-      array = NSWParks.park_region(region_no.to_s)
+      array = Nsw_parks.park_region(region_no.to_s)
       array.each.with_index(1) {|a,i| puts "#{i}. #{a}"}
       puts ""
       puts "---------------------------------------------------------"
@@ -80,27 +80,28 @@ class NSWParks::CLI
       input = gets.strip.to_i
     end
     puts ""
-    puts "Information for #{array[input - 1]}:"
+    puts "Information for #{array[input - 1]}:"  # Puts out heading of park name
     puts "----------------------------------------------------------------------------------------"
-    NSWParks.park_from_region(array[input - 1])  
+    # Puts out parks info using Nsw_parks #park_from_region to locate park in @@all
+    Nsw_parks.park_from_region(array[input - 1])  
   end
 
-  # Accesses the website information for a selected NSW National Park
+  # Accesses the website information for a selected NSW National Park using Nsw_parks #park_url
   def park_url
     puts ""
-    NSWParks.park_url
+    Nsw_parks.park_url
   end
 
-  # Accesses the website information for an interactive map of all parks
+  # Accesses the website information for an interactive map of all parks using Nsw_parks #park_map
   def park_map
     puts ""
-    NSWParks.park_map
+    Nsw_parks.park_map
   end
 
-  # Accesses the website information for free park guide downloads
+  # Accesses the website information for free park guide downloads using Nsw_parks #park_guide
   def park_guide
     puts ""
-    NSWParks.park_guide
+    Nsw_parks.park_guide
   end
 
   # Starts the app and gives users the available options for the app
