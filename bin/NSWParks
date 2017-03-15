@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
-require_relative '../lib/nsw_parks'
-require_relative '../lib/cli'
+#require_relative '../lib/NSWParks/nsw_parks'
+#require_relative '../lib/NSWParks/cli'
+require "NSWParks"
 
-CLI.new.call
+NSWParks::CLI.new.call

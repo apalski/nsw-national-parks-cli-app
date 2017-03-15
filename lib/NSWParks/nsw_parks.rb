@@ -1,6 +1,5 @@
-require "./config/environment"
 
-class NSWParks::NSW_Parks
+class NSWParks::Nsw_parks
 
 	attr_accessor :name, :park_url, :park_region
 
