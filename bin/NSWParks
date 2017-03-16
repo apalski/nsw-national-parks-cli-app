@@ -4,8 +4,8 @@ module NSWParks
   
 end
 
-#require_relative '../lib/NSWParks/nsw_parks'
-#require_relative '../lib/NSWParks/cli'
-require "./lib/NSWParks"
+require_relative '../lib/NSWParks/nsw_parks'
+require_relative '../lib/NSWParks/cli'
+require_relative "../lib/NSWParks"
 
 NSWParks::CLI.new.call
