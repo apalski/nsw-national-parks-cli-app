@@ -4,16 +4,16 @@ class NSWParks::Nsw_parks
 	attr_accessor :name, :park_url, :park_region
 
 	@@all = []  # Collects all NSW National Parks 
-	@@areas = []
 
+	# Initialize each Nsw_parks instance with a name and park_url attribute, no default
 	def initialize (name, park_url)
 		@name = name
 		@park_url = park_url
-		@@all << self  # Add each new NSW National Park to the collection as it is created
+		@@all << self  # Add each new NSW National Park instance to the collection as it is created
 	end
 
 	def self.all
-		@@all  # Access all created NSW National Parks
+		@@all  # Access all created NSW National Parks instances
 	end
 
 	# Create new NSW National Parks from the National Parks webstie
@@ -23,6 +23,7 @@ class NSWParks::Nsw_parks
 	    park.collect {|a| new(a.text.strip, a.attribute("href").value)}
   	end 	
 
+  	# Instructions to the user on how to use the provided website links
   	def url_use
   		puts "<------------------------------------------------------------------------------->"
    		puts " Right-click or Control-click on the website address above and select 'open url'" 
@@ -35,14 +36,14 @@ class NSWParks::Nsw_parks
   		check = ""
   		# Select the park from the list in @@all using the park's park_url attribute
   		park = Nokogiri::HTML(open("#{@@all[park_no - 1].park_url}"))
-		# Description of the park
+		# Description of the park and its attractions
 		check = park.css("#content__inner div.overviewIntro div.overviewIntro__readMoreText p")
 		# If there is no overview available display alternative text for the park
 		if check.empty?
 			puts park.css("#content__inner div.overviewIntro p").text
 			link = park.css("#content__inner div.overviewIntro a")
 			puts "The OEH website can be found at #{link.attribute("href").value}"
-			url_use
+			url_use  # Instructions to the user on how to use the provided website links
 		else  # If overview available put that out to the user
 			puts park.css("#content__inner div.overviewIntro div.overviewIntro__readMoreText p").text
 		end	
@@ -62,7 +63,7 @@ class NSWParks::Nsw_parks
 		array
    end
 
-   # Output the National Parks for each of the seven NSW Regions
+   # Output the National Parks for each of the seven NSW Regions from the individual region websites
    def self.park_region(region_no)
    		array = []
    		case region_no
@@ -120,7 +121,7 @@ class NSWParks::Nsw_parks
  		@@all.each.with_index do |a,i| 
  			# Find the park in region in the @@all array and return its overview
  			if a.name == park
- 				park_overview(i + 1)
+ 				park_overview(i + 1) 
  			end
 		end	
 	end				
@@ -128,13 +129,13 @@ class NSWParks::Nsw_parks
    # Accesses the website information for a selected NSW National Park
    def self.park_url
    		input = 0
-   		@@all.each.with_index(1) {|a,i| puts "#{i}. #{a.name}"}
+   		@@all.each.with_index(1) {|a,i| puts "#{i}. #{a.name}"} # Puts outs list of National Parks
    		puts ""
    		puts "Select the park number from above and enter the number to access the website address"
    		input = gets.strip.to_i
    		# Validate user input - input must be numerical and exist in the list
-   		while !(input.is_a? Integer) || input < 1 || input > @@all.length
-   			@@all.each.with_index(1) {|a,i| puts "#{i}. #{a.name}"}
+   		while !(input.is_a? Integer) || input < 1 || input > @@all.length  
+   			@@all.each.with_index(1) {|a,i| puts "#{i}. #{a.name}"}  # Puts outs list of National Parks
    			puts ""
    			puts "----------------------------------------------"
    			puts "Please enter a park number from the list above:"  # Prompt user to enter again
@@ -142,30 +143,27 @@ class NSWParks::Nsw_parks
    			input = gets.strip.to_i
    		end	
    		puts ""
-   		puts "The website address for #{@@all[input - 1].name} is:"
+   		puts "The website address for #{@@all[input - 1].name} is:"  # Puts a heading of the park name
    		puts ""
-   		puts @@all[input - 1].park_url
+   		puts @@all[input - 1].park_url  # Puts out the park website address
    		puts ""  
-   		url_use
+   		url_use  # Instructions to the user on how to use the provided website links
    end
 
    # Provides user with a link to the map and instructions to open the link in their browser
    def self.park_map
    		puts "http://www.nationalparks.nsw.gov.au/nsw-state-map" # No url to scrape - hidden
    		puts ""
-   		puts "<------------------------------------------------------------------------------->"
-   		puts " Right-click or Control-click on the website address above and select 'open url'" 
-   		puts "  from the dropdown menu!! This will open the website in your default browser  "
-   		puts "<------------------------------------------------------------------------------->"
+   		url_use  # Instructions to the user on how to use the provided website links
    end
 
    # Provides user with a link to guides and instructions to open the link in their browser
    def self.park_guide
    		page = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au"))	
    		link = page.css("#headerNavBottom nav ul li#mainNav__about .box ul li[5] a")
-   		puts link.attribute("href").value
+   		puts link.attribute("href").value  # Puts out the website address forthe park guides
    		puts ""
-   		url_use
+   		url_use  # Instructions to the user on how to use the provided website links
    	end	
  end 	
 
