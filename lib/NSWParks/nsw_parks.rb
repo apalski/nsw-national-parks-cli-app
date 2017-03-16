@@ -24,7 +24,7 @@ class NSWParks::Nsw_parks
   	end 	
 
   	# Instructions to the user on how to use the provided website links
-  	def url_use
+  	def self.url_use
   		puts "<------------------------------------------------------------------------------->"
    		puts " Right-click or Control-click on the website address above and select 'open url'" 
    		puts "  from the dropdown menu!! This will open the website in your default browser  "
