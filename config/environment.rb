@@ -5,8 +5,9 @@ require 'open-uri'
 require 'bundler'
 Bundler.require
 
-require_relative '../lib/nsw_parks'
-require_relative '../lib/cli'
+require_relative '../lib/NSWParks/nsw_parks'
+require_relative '../lib/NSWParks/cli'
+require '../lib/NSWParks/version'
 
 
 

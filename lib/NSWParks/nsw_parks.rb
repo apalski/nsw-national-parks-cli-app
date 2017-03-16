@@ -129,6 +129,7 @@ class NSWParks::Nsw_parks
    # Accesses the website information for a selected NSW National Park
    def self.park_url
    		input = 0
+   		array = 0
    		@@all.each.with_index(1) {|a,i| puts "#{i}. #{a.name}"} # Puts outs list of National Parks
    		puts ""
    		puts "Select the park number from above and enter the number to access the website address"
