@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["annette.drapalski@gmail.com"]
   spec.summary       = %q{Supply information on NSW National Parks}
   spec.description   = %q{Access to information on National Parks in the Australian State of New South Wales}
-  spec.homepage      = "https://github.com/apalski/nsw-national-parks-cli-app"
+  spec.homepage      = "http://rubygems.org/gems/NSWParks"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($\)
