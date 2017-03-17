@@ -109,18 +109,15 @@ class NSWParks::CLI
     answer = 0 
     while answer != "exit"
       puts ""
-      puts "For a list of all NSW National Parks enter 'list'"
+      puts "For a list of NSW National Parks and information on a park enter 'info"
       puts "To exit the program enter 'exit'"
       puts "To see the National Park regions in NSW and choose a park by its region enter 'region'"
-      puts "For more information on a park enter 'info"
       puts "To access a interactive map of all National Parks in NSW enter 'map'"
       puts "To download a free pocket guide for NSW National Park Regions enter 'guide'"
       puts "To visit the website for a National Park enter 'url'"
       puts ""
       answer = gets.strip
-      if answer == "list"
-          park_list
-      elsif answer == "info"
+      if answer == "info"
           park_info         
       elsif answer == "region"
           park_region 
