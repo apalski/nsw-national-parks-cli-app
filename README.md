@@ -32,11 +32,11 @@ State Government.
 
 ## Installation
 
-You can install this gem via gem install NSWParks. The NSWParks CLI will be installed and you can run NSWParks to get a list and information on NSW National Parks right in your command line.
+You can install this gem via gem install nswparks. The nswparks CLI will be installed and you can run nswparks to get a list and information on NSW National Parks right in your command line.
 
 ## Usage
 
-Run: NSWParks after installing the gem.
+Run: nswparks after installing the gem.
 
 ## Development
 
@@ -44,7 +44,7 @@ After checking out the repo, run `bundle exec bin/setup` to install dependencies
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to rubygems.org.
 
-To run the development version of the CLI run `bundle exec bin/NSWParks`.
+To run the development version of the CLI run `bundle exec bin/nswparks`.
 
 ## Contributing
 
