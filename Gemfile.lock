@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    NSWParks (0.0.1)
+    nswparks (1.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -29,9 +29,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  NSWParks!
   bundler (~> 1.14)
-  nokogiri
+  nokogiri (~> 1.7)
+  nswparks!
   rake (~> 10.0)
   rspec (~> 3.0)
 

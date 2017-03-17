@@ -3,3 +3,6 @@ example_id                     | status | run_time        |
 ./spec/NSWParks_spec.rb[1:1]   | passed | 0.00147 seconds |
 ./spec/NSWParks_spec.rb[2:1:1] | passed | 0.00288 seconds |
 ./spec/NSWParks_spec.rb[3:1]   | passed | 1.69 seconds    |
+./spec/nswparks_spec.rb[1:1]   | passed | 0.00605 seconds |
+./spec/nswparks_spec.rb[2:1:1] | passed | 0.01128 seconds |
+./spec/nswparks_spec.rb[3:1]   | passed | 1.55 seconds    |
