@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+module NSWParks
+  
+end
+
+require_relative '../lib/nswparks/nsw_parks'
+require_relative '../lib/nswparks/cli'
+require_relative "../lib/nswparks"
+
+NSWParks::CLI.new.call
