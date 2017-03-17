@@ -2,14 +2,14 @@
 
 CLI application for accessing information on National Parks in NSW Australia				
 ## Table of Contents
-* Introduction
+* [Introduction]("Introduction")
 * Included Features
 * Installation
 * Usage
 * Development
 * Contributing
 * License
-## Introduction
+## Introduction<a name="Introduction"></a>
 
 This is a Ruby Gem to provide the user with information on all 
 Australian National Parks overseen by the New South Wales (NSW) 
