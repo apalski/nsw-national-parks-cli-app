@@ -13,7 +13,7 @@ CLI application for accessing information on National Parks in NSW Australia
 
 This is a Ruby Gem to provide the user with information on all 
 Australian National Parks overseen by the New South Wales (NSW) 
-state government. 
+State Government. 
 
 ## Included Features
 
