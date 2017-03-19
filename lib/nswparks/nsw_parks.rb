@@ -124,7 +124,15 @@ class NSWParks::Nsw_parks
  				park_overview(i + 1) 
  			end
 		end	
-	end				
+	end	
+
+	 def self.valid_input
+    puts ""
+      puts "---------------------------------------------------------"
+      puts "Please enter one of the numbers from the list above:"  # Prompt user to enter again
+      puts "---------------------------------------------------------"
+      gets.strip.to_i
+  end			
 
    # Accesses the website information for a selected NSW National Park
    def self.park_url
@@ -137,11 +145,7 @@ class NSWParks::Nsw_parks
    		# Validate user input - input must be numerical and exist in the list
    		while !(input.is_a? Integer) || input < 1 || input > @@all.length  
    			@@all.each.with_index(1) {|a,i| puts "#{i}. #{a.name}"}  # Puts outs list of National Parks
-   			puts ""
-   			puts "----------------------------------------------"
-   			puts "Please enter a park number from the list above:"  # Prompt user to enter again
-   			puts "----------------------------------------------"
-   			input = gets.strip.to_i
+   			input = valid_input
    		end	
    		puts ""
    		puts "The website address for #{@@all[input - 1].name} is:"  # Puts a heading of the park name

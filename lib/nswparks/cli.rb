@@ -27,11 +27,7 @@ class NSWParks::CLI
     # Validate user input - input must be an integer and exist in the list
     while !(park_no.is_a? Integer) || park_no < 1 || park_no > NSWParks::Nsw_parks.all.length
       park_list
-      puts ""
-      puts "-----------------------------------------------"
-      puts "Please enter a park number from the list above:"  # Prompt user to enter again
-      puts "-----------------------------------------------"
-      park_no = gets.strip.to_i
+      park_no = NSWParks::Nsw_parks.valid_input
     end  
     puts ""
     puts NSWParks::Nsw_parks.all[park_no - 1].name  # Gives returned park info a heading of the park name
@@ -56,11 +52,7 @@ class NSWParks::CLI
     # Validate user input - input must be numerical and exist in the list   
     while !(region_no.is_a? Integer) || region_no < 1 || region_no > areas.length
       park_area
-      puts ""
-      puts "--------------------------------------------------"
-      puts "Please enter one of the regions in the list above:"  # Prompt user to enter again
-      puts "--------------------------------------------------"      
-      region_no = gets.strip.to_i
+      region_no = NSWParks::Nsw_parks.valid_input
     end
     puts ""
     puts "The parks in the #{areas[region_no.to_i - 1]} region are:"
@@ -73,11 +65,7 @@ class NSWParks::CLI
     while !(input.is_a? Integer) || input < 1 || input > array.length
       array = NSWParks::Nsw_parks.park_region(region_no.to_s)
       array.each.with_index(1) {|a,i| puts "#{i}. #{a}"}
-      puts ""
-      puts "---------------------------------------------------------"
-      puts "Please enter one of the park numbers from the list above:"  # Prompt user to enter again
-      puts "---------------------------------------------------------"
-      input = gets.strip.to_i
+      input = NSWParks::Nsw_parks.valid_input
     end
     puts ""
     puts "Information for #{array[input - 1]}:"  # Puts out heading of park name
@@ -109,10 +97,10 @@ class NSWParks::CLI
     answer = 0 
     while answer != "exit"
       puts ""
-      puts "For a list of NSW National Parks and information on a park enter 'info"
+      puts "For a list of NSW National Parks and information on a park enter 'info'"
       puts "To exit the program enter 'exit'"
       puts "To see the National Park regions in NSW and choose a park by its region enter 'region'"
-      puts "To access a interactive map of all National Parks in NSW enter 'map'"
+      puts "To access an interactive map of all National Parks in NSW enter 'map'"
       puts "To download a free pocket guide for NSW National Park Regions enter 'guide'"
       puts "To visit the website for a National Park enter 'url'"
       puts ""
