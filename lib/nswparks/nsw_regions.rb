@@ -41,4 +41,16 @@ class NSWParks::Nsw_regions
 		array = region_sort(link) # Remove areas that are not National Parks 
 		array
 	end
+
+	# Removes areas that are not National Parks from the returned array
+   def self.region_sort(link)
+   		array = []
+   		clean = []
+   		link.collect {|a| array << a.children.text}
+		array.select! {|a| a.include?("National")}
+		# Remove leading and trailing white space from the park names
+		clean = array.collect {|a| a.strip}
+		clean
+   end
 end
+
