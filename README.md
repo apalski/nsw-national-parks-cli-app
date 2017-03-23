@@ -28,8 +28,6 @@ State Government.
 * It allows you to request information on each national park from the main list 
   and from the region list
 
-
-
 ## Installation
 
 You can install this gem via `gem install nswparks`. The nswparks CLI will be installed and you can run `nswparks` to get a list and information on NSW National Parks right in your command line.
@@ -37,6 +35,10 @@ You can install this gem via `gem install nswparks`. The nswparks CLI will be in
 ## Usage
 
 Run: `nswparks` after installing the gem.
+
+## Contributors
+
+Malki Davis for the hint to use system open
 
 ## Development
 
