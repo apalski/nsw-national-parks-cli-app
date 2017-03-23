@@ -4,6 +4,7 @@ end
 
 require 'nokogiri'
 require 'open-uri'
+require 'pry'
 require 'bundler'
 Bundler.require
 
