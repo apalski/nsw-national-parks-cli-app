@@ -46,7 +46,7 @@ class NSWParks::CLI
   def park_region
     region_no = 0
     input = 0
-    areas = park_area  # Use #park_area to output list of NSW Regions
+    areas = park_area  # Use #park_area to output list of NSW Regions and select a region
     puts "Enter the number for the region you are interested in:"
     region_no = gets.strip.to_i 
     # Validate user input - input must be numerical and exist in the list   
@@ -94,7 +94,7 @@ class NSWParks::CLI
 
   # Starts the app and gives users the available options for the app
   def start
-    answer = 0 
+    answer = nil
     while answer != "exit"
       puts ""
       puts "For a list of NSW National Parks and information on a park enter 'info'"

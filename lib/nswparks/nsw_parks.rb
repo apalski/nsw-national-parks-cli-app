@@ -1,7 +1,7 @@
 
 class NSWParks::Nsw_parks
 
-	attr_accessor :name, :park_url, :park_region
+	attr_accessor :name, :park_url
 
 	@@all = []  # Collects all NSW National Parks 
 
