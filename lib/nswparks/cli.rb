@@ -4,6 +4,7 @@ class NSWParks::CLI
   # Loads all the NSW National Parks, puts out welcome message and starts the app
   def call
     NSWParks::Nsw_parks.new_park
+    NSWParks::Nsw_regions.create_region
     puts ""
     puts ""
     puts " >------------------------------------------------<"
@@ -39,7 +40,7 @@ class NSWParks::CLI
   # Puts out a list of the NSW Regions that contain National Parks using Nsw_parks #nsw_areas
   def park_area
     puts ""
-    NSWParks::Nsw_parks.nsw_areas
+    NSWParks::Nsw_regions.nsw_regions
   end
 
   # Puts out a list of National Parks in a selected NSW Region
@@ -56,14 +57,14 @@ class NSWParks::CLI
     end
     puts ""
     puts "The parks in the #{areas[region_no.to_i - 1]} region are:"
-    array = NSWParks::Nsw_parks.park_region(region_no.to_s)
+    array = NSWParks::Nsw_regions.park_region(region_no.to_s)
     array.each.with_index(1) {|a,i| puts "#{i}. #{a}"} # Puts parks in region using Nsw_parks
     puts ""
     puts "Enter your park number from this list for more information:"
     input = gets.strip.to_i 
     # Validate user input - input must be numerical and exist in the list  
     while !(input.is_a? Integer) || input < 1 || input > array.length
-      array = NSWParks::Nsw_parks.park_region(region_no.to_s)
+      array = NSWParks::Nsw_regions.park_region(region_no.to_s)
       array.each.with_index(1) {|a,i| puts "#{i}. #{a}"}
       input = NSWParks::Nsw_parks.valid_input
     end

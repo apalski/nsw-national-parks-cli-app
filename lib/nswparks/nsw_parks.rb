@@ -66,6 +66,16 @@ class NSWParks::Nsw_parks
    		system("open #{@@all[input - 1].park_url}")  # Puts out the park website address
     end
 
+    # Return overview for a park using its listing under its region
+    def self.park_from_region(park)
+ 		@@all.each.with_index do |a,i| 
+ 			# Find the park in region in the @@all array and return its overview
+ 			if a.name == park
+ 				park_overview(i + 1) 
+ 			end
+		end	
+	end	
+
     # Provides user with a link to the map and instructions to open the link in their browser
     def self.park_map
    		system("open http://www.nationalparks.nsw.gov.au/nsw-state-map") # Cannot scrape - hidden content

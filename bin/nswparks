@@ -2,6 +2,7 @@
 
 require_relative "../lib/nswparks"
 require_relative '../lib/nswparks/nsw_parks'
+require_relative '../lib/nswparks/nsw_regions'
 require_relative '../lib/nswparks/cli'
 
 NSWParks::CLI.new.call
