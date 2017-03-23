@@ -1,7 +1,7 @@
 
 class NSWParks::Nsw_parks
 
-	attr_accessor :name, :park_url
+	attr_reader :name, :park_url
 
 	@@all = []  # Collects all NSW National Parks 
 
@@ -16,7 +16,7 @@ class NSWParks::Nsw_parks
 		@@all  # Access all created NSW National Parks instances
 	end
 
-	# Create new NSW National Parks from the National Parks website
+	# Create new NSW National Parks instances from the National Parks website
    	def self.create_park
    		page = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/conservation-and-heritage/national-parks"))		
 	    park = page.css("#content__inner .dynamicListing li a")
@@ -25,46 +25,45 @@ class NSWParks::Nsw_parks
 
   	# Allow users to access information on any NSW National Park
   	def self.park_info(park_no)
-  		check = ""
+  		check_for_overview = nil
   		# Select the park from the list in @@all using the park's park_url attribute
   		park = Nokogiri::HTML(open("#{@@all[park_no - 1].park_url}"))
-		# Description of the park and its attractions
-		check = park.css("#content__inner div.overviewIntro div.overviewIntro__readMoreText p")
-		# If there is no overview available display alternative text for the park
-		if check.empty?
-			puts park.css("#content__inner div.overviewIntro p").text
-			link = park.css("#content__inner div.overviewIntro a")
-			puts "The OEH website can be found at #{link.attribute("href").value}"
-			url_use  # Instructions to the user on how to use the provided website links
-		else  # If overview available put that out to the user
-			puts park.css("#content__inner div.overviewIntro div.overviewIntro__readMoreText p").text
-		end	
-		puts "----------------------------------------------------------------------------------------"
+  		# Description of the park and its attractions
+  		check_for_overview = park.css("#content__inner div.overviewIntro div.overviewIntro__readMoreText p")
+  		# If there is no overview available display alternative text for the park
+  		if check_for_overview.empty?
+  			puts park.css("#content__inner div.overviewIntro p").text
+  			link = park.css("#content__inner div.overviewIntro a")
+  			puts "The OEH website can be found at #{link.attribute("href").value}"
+  		else  # If overview available put that out to the user
+  			puts park.css("#content__inner div.overviewIntro div.overviewIntro__readMoreText p").text
+  		end	
+  		puts "----------------------------------------------------------------------------------------"
   	end
 
-  	# Validates the user input for all numerical user inputs
+  	# Handles output to user for input validations for all numerical user inputs
 	def self.valid_input?
       puts ""
       puts "---------------------------------------------------------"
       puts "Please enter one of the numbers from the list above:"  # Prompt user to enter again
       puts "---------------------------------------------------------"
-      gets.strip.to_i
+      gets.strip.to_i  # receive and return user input
     end			
 
     # Accesses the website information for a selected NSW National Park
     # Opens the park website in the user's default browser
     def self.park_url
-   		input = 0
+   		park_no = 0
    		@@all.each.with_index(1) {|a,i| puts "#{i}. #{a.name}"} # Puts outs list of National Parks
    		puts ""
    		puts "Select the park number from above and enter the number to access the website address"
-   		input = gets.strip.to_i
+   		park_no = gets.strip.to_i
    		# Validate user input - input must be numerical and exist in the list
-   		while !(input.is_a? Integer) || input < 1 || input > @@all.length  
+   		while !(park_no.is_a? Integer) || park_no < 1 || park_no > @@all.length  
    			@@all.each.with_index(1) {|a,i| puts "#{i}. #{a.name}"}  # Puts outs list of National Parks
-   			input = valid_input?
+   			park_no = valid_input?
    		end	
-   		system("open #{@@all[input - 1].park_url}")  # Puts out the park website address
+   		system("open #{@@all[park_no - 1].park_url}")  # Puts out the park website address
     end
 
     # Return overview for a park using its listing under its region

@@ -18,7 +18,7 @@ class NSWParks::Nsw_regions
 	# Create new NSW National Parks Regions from the National Parks website
 	def self.create_region
 		page = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/visit-a-park/"))
-		puts region = page.css("#mainParkNavJump .wrapper ul li a")
+		region = page.css("#mainParkNavJump .wrapper ul li a")
 	    region.collect {|a| new(a.text.strip, "http://www.nationalparks.nsw.gov.au#{a.attribute("href").value}")}
 	end
 
