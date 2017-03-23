@@ -26,7 +26,7 @@ class NSWParks::CLI
     puts "Enter the number for the park you are interested in:"
     park_no = gets.strip.to_i
     # Validate user input - input must be an integer and exist in the list
-    while !(park_no.is_a? Integer) || park_no < 1 || park_no > NSWParks::Nsw_parks.all.length
+    while !(park_no.is_a? Integer) || park_no < 1 || park_no > NSWParks::Nsw_parks.all.size
       park_list
       park_no = NSWParks::Nsw_parks.valid_input?
     end  
@@ -41,11 +41,12 @@ class NSWParks::CLI
   def park_region
     region_no = 0
     park_no = 0
+    puts ""
     areas = NSWParks::Nsw_regions.nsw_regions  # Use #park_area to output list of NSW Regions and select a region
     puts "Enter the number for the region you are interested in:"
     region_no = gets.strip.to_i 
     # Validate user input - input must be numerical and exist in the list   
-    while !(region_no.is_a? Integer) || region_no < 1 || region_no > areas.length
+    while !(region_no.is_a? Integer) || region_no < 1 || region_no > areas.size
       NSWParks::Nsw_regions.nsw_regions
       region_no = NSWParks::Nsw_parks.valid_input?
     end
@@ -57,7 +58,7 @@ class NSWParks::CLI
     puts "Enter your park number from this list for more information:"
     park_no = gets.strip.to_i 
     # Validate user input - input must be numerical and exist in the list  
-    while !(park_no.is_a? Integer) || park_no < 1 || park_no > array.length
+    while !(park_no.is_a? Integer) || park_no < 1 || park_no > array.size
       array = NSWParks::Nsw_regions.park_region(region_no.to_s)
       array.each.with_index(1) {|a,i| puts "#{i}. #{a}"}
       park_no = NSWParks::Nsw_parks.valid_input?
@@ -69,28 +70,10 @@ class NSWParks::CLI
     NSWParks::Nsw_parks.park_from_region(array[park_no - 1])  
   end
 
-  # Accesses the website information for a selected NSW National Park using Nsw_parks #park_url
-  def park_url
-    puts ""
-    NSWParks::Nsw_parks.park_url
-  end
-
-  # Accesses the website information for an interactive map of all parks using Nsw_parks #park_map
-  def park_map
-    puts ""
-    NSWParks::Nsw_parks.park_map
-  end
-
-  # Accesses the website information for free park guide downloads using Nsw_parks #park_guide
-  def park_guide
-    puts ""
-    NSWParks::Nsw_parks.park_guide
-  end
-
   # Starts the app and gives users the available options for the app
   def start
-    answer = nil
-    while answer != "exit"
+    main_menu_option = nil
+    while main_menu_option != "exit"
       puts ""
       puts "For a list of NSW National Parks and information on a park enter 'info'"
       puts "To exit the program enter 'exit'"
@@ -99,19 +82,19 @@ class NSWParks::CLI
       puts "To download a free pocket guide for NSW National Park Regions enter 'guide'"
       puts "To visit the website for a National Park enter 'url'"
       puts ""
-      answer = gets.strip
-      if answer == "info"
+      main_menu_option = gets.strip
+      if main_menu_option == "info"
           park_info         
-      elsif answer == "region"
+      elsif main_menu_option == "region"
           park_region 
-      elsif answer == "url"
-          park_url
-      elsif answer == "map"
-          park_map  
-      elsif answer == "guide"
-          park_guide   
+      elsif main_menu_option == "url"
+          NSWParks::Nsw_parks.park_url
+      elsif main_menu_option == "map"
+          NSWParks::Nsw_parks.park_map  
+      elsif main_menu_option == "guide"
+          NSWParks::Nsw_parks.park_guide  
       # Validates the user input              
-      elsif answer != "exit"
+      elsif main_menu_option != "exit"
           puts ""
           puts "---------------------------------------------"
           puts "Please enter one of the options from the list"  # Prompt user to enter again 

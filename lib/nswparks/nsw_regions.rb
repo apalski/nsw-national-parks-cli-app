@@ -28,7 +28,6 @@ class NSWParks::Nsw_regions
    		array = []
 		# Put out the list of Regions numerically
 		@@all.collect.with_index(1) do |a,i| 
-			puts ""
 			puts "#{i}. #{a.region_name}"
 			array << a.region_name
 		end	

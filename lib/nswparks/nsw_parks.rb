@@ -52,6 +52,7 @@ class NSWParks::Nsw_parks
     end			
 
     # Accesses the website information for a selected NSW National Park
+    # Opens the park website in the user's default browser
     def self.park_url
    		input = 0
    		@@all.each.with_index(1) {|a,i| puts "#{i}. #{a.name}"} # Puts outs list of National Parks
@@ -76,12 +77,12 @@ class NSWParks::Nsw_parks
 		end	
 	end	
 
-    # Provides user with a link to the map and instructions to open the link in their browser
+    # Opens the interactive NSW Map in the user's default browser
     def self.park_map
    		system("open http://www.nationalparks.nsw.gov.au/nsw-state-map") # Cannot scrape - hidden content
     end
 
-    # Provides user with a link to guides and instructions to open the link in their browser
+    # Opens the download page for pocket guides in the user's default browser
     def self.park_guide
    		page = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au"))	
    		link = page.css("#headerNavBottom nav ul li#mainNav__about .box ul li[5] a")
