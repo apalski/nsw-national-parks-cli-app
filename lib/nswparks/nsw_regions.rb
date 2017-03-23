@@ -32,4 +32,13 @@ class NSWParks::Nsw_regions
 		end	
 		array
     end
+
+    # Output the National Parks for each region as requested
+	def self.park_region(region_no)
+		region = @@all[region_no.to_i - 1]  # Select the region from the @@all array
+		page = Nokogiri::HTML(open("#{region.region_url}"))
+		link = page.css("#content__inner ul.detailRightColumn__linkList a")
+		array = region_sort(link) # Remove areas that are not National Parks 
+		array
+	end
 end
