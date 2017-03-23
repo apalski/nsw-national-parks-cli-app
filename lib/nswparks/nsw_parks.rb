@@ -16,7 +16,7 @@ class NSWParks::Nsw_parks
 		@@all  # Access all created NSW National Parks instances
 	end
 
-	# Create new NSW National Parks from the National Parks webstie
+	# Create new NSW National Parks from the National Parks website
    	def self.new_park
    		page = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/conservation-and-heritage/national-parks"))		
 	    park = page.css("#content__inner .dynamicListing li a")
