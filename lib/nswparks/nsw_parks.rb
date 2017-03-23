@@ -24,7 +24,7 @@ class NSWParks::Nsw_parks
   	end 	
 
   	# Allow users to access information on any NSW National Park
-  	def self.park_overview(park_no)
+  	def self.park_info(park_no)
   		check = ""
   		# Select the park from the list in @@all using the park's park_url attribute
   		park = Nokogiri::HTML(open("#{@@all[park_no - 1].park_url}"))
@@ -72,7 +72,7 @@ class NSWParks::Nsw_parks
  		@@all.each.with_index do |a,i| 
  			# Find the park in region in the @@all array and return its overview
  			if a.name == park
- 				park_overview(i + 1) 
+ 				park_info(i + 1) 
  			end
 		end	
 	end	

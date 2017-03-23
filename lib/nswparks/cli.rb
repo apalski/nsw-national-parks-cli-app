@@ -34,7 +34,7 @@ class NSWParks::CLI
     puts NSWParks::Nsw_parks.all[park_no - 1].name  # Gives returned park info a heading of the park name
     puts ""
     puts "----------------------------------------------------------------------------------------"
-    NSWParks::Nsw_parks.park_overview(park_no)  # Puts out park info using Nsw_parks #park_overview
+    NSWParks::Nsw_parks.park_info(park_no)  # Puts out park info using Nsw_parks #park_info
   end
 
   # Puts out a list of National Parks in a selected NSW Region
@@ -43,10 +43,12 @@ class NSWParks::CLI
     park_no = 0
     puts ""
     areas = NSWParks::Nsw_regions.nsw_regions  # Use #park_area to output list of NSW Regions and select a region
+    puts ""
     puts "Enter the number for the region you are interested in:"
     region_no = gets.strip.to_i 
     # Validate user input - input must be numerical and exist in the list   
     while !(region_no.is_a? Integer) || region_no < 1 || region_no > areas.size
+      puts ""
       NSWParks::Nsw_regions.nsw_regions
       region_no = NSWParks::Nsw_parks.valid_input?
     end
