@@ -21,4 +21,15 @@ class NSWParks::Nsw_regions
 		puts region = page.css("#mainParkNavJump .wrapper ul li a")
 	    region.collect {|a| new(a.text.strip, "http://www.nationalparks.nsw.gov.au#{a.attribute("href").value}")}
 	end
+
+	# Show the Regions that NSW National Parks are listed within
+	def self.nsw_regions
+   		array = []
+		# Put out the list of Regions numerically
+		@@all.collect.with_index(1) do |a,i| 
+			puts "#{i}. #{a.region_name}"
+			array << a.region_name
+		end	
+		array
+    end
 end
