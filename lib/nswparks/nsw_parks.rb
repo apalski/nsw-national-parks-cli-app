@@ -17,7 +17,7 @@ class NSWParks::Nsw_parks
 	end
 
 	# Create new NSW National Parks from the National Parks website
-   	def self.new_park
+   	def self.create_park
    		page = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/conservation-and-heritage/national-parks"))		
 	    park = page.css("#content__inner .dynamicListing li a")
 	    park.collect {|a| new(a.text.strip, a.attribute("href").value)}
@@ -43,7 +43,7 @@ class NSWParks::Nsw_parks
   	end
 
   	# Validates the user input for all numerical user inputs
-	def self.valid_input
+	def self.valid_input?
       puts ""
       puts "---------------------------------------------------------"
       puts "Please enter one of the numbers from the list above:"  # Prompt user to enter again
@@ -61,7 +61,7 @@ class NSWParks::Nsw_parks
    		# Validate user input - input must be numerical and exist in the list
    		while !(input.is_a? Integer) || input < 1 || input > @@all.length  
    			@@all.each.with_index(1) {|a,i| puts "#{i}. #{a.name}"}  # Puts outs list of National Parks
-   			input = valid_input
+   			input = valid_input?
    		end	
    		system("open #{@@all[input - 1].park_url}")  # Puts out the park website address
     end

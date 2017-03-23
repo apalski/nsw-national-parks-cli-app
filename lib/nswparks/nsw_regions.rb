@@ -23,10 +23,12 @@ class NSWParks::Nsw_regions
 	end
 
 	# Show the Regions that NSW National Parks are listed within
+	# Puts out a list of the NSW Regions that contain National Parks 
 	def self.nsw_regions
    		array = []
 		# Put out the list of Regions numerically
 		@@all.collect.with_index(1) do |a,i| 
+			puts ""
 			puts "#{i}. #{a.region_name}"
 			array << a.region_name
 		end	
