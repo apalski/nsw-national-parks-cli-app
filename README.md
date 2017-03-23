@@ -40,6 +40,11 @@ Run: `nswparks` after installing the gem.
 
 Malki Davis for the hint to use system open
 
+## Versions
+* 1.0.0 - yanked as README.md incomplete
+* 1.1.0 - added ability to auto open websites for the user
+* 1.1.1 - added new class to simplify access to park regions
+
 ## Development
 
 After checking out the repo, run `bundle exec bin/setup` to install dependencies. Then, run `bundle exec rake spec` to run the tests. You can also run `bundle exec bin/console` for an interactive prompt that will allow you to experiment.
