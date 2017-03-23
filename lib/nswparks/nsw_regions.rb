@@ -1,6 +1,6 @@
 class NSWParks::Nsw_regions
 
-	attr_accessor :region_name, :region_url
+	attr_reader :region_name, :region_url
 
 	@@all = []  # Collects all NSW National Parks Regions
 
@@ -23,15 +23,9 @@ class NSWParks::Nsw_regions
 	end
 
 	# Show the Regions that NSW National Parks are listed within
-	# Puts out a list of the NSW Regions that contain National Parks 
+	# Puts out a numerical list of the NSW Regions that contain National Parks 
 	def self.nsw_regions
-   		array = []
-		# Put out the list of Regions numerically
-		@@all.collect.with_index(1) do |a,i| 
-			puts "#{i}. #{a.region_name}"
-			array << a.region_name
-		end	
-		array
+		array = @@all.collect.with_index(1) { |a,i| puts "#{i}. #{a.region_name}"}
     end
 
     # Output the National Parks for each region as requested
@@ -40,18 +34,14 @@ class NSWParks::Nsw_regions
 		page = Nokogiri::HTML(open("#{region.region_url}"))
 		link = page.css("#content__inner ul.detailRightColumn__linkList a")
 		array = region_sort(link) # Remove areas that are not National Parks 
-		array
 	end
 
 	# Removes areas that are not National Parks from the returned array
    def self.region_sort(link)
-   		array = []
-   		clean = []
-   		link.collect {|a| array << a.children.text}
+   		array = link.collect {|a| a.children.text}
 		array.select! {|a| a.include?("National")}
 		# Remove leading and trailing white space from the park names
 		clean = array.collect {|a| a.strip}
-		clean
    end
 end
 

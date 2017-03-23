@@ -15,7 +15,7 @@ class NSWParks::CLI
 
   # Puts out a numerical list of all NSW National Parks
   def park_list
-    NSWParks::Nsw_parks.all.each.with_index(1) {|a,i| puts "#{i}. #{a.name}"} # Start array index from 1 not 0
+    NSWParks::Nsw_parks.all.each.with_index(1) {|a,i| puts "#{i}. #{a.park_name}"} # Start array index from 1 not 0
   end 
 
   # Puts out information on a selected NSW National Park using #park_list
@@ -31,7 +31,7 @@ class NSWParks::CLI
       park_no = NSWParks::Nsw_parks.valid_input?
     end  
     puts ""
-    puts NSWParks::Nsw_parks.all[park_no - 1].name  # Gives returned park info a heading of the park name
+    puts NSWParks::Nsw_parks.all[park_no - 1].park_name  # Gives returned park info a heading of the park name
     puts ""
     puts "----------------------------------------------------------------------------------------"
     NSWParks::Nsw_parks.park_info(park_no)  # Puts out park info using Nsw_parks #park_info

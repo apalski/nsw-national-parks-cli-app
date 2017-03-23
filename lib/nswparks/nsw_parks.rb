@@ -1,13 +1,13 @@
 
 class NSWParks::Nsw_parks
 
-	attr_reader :name, :park_url
+	attr_reader :park_name, :park_url
 
 	@@all = []  # Collects all NSW National Parks 
 
 	# Initialize each Nsw_parks instance with a name and park_url attribute, no default
-	def initialize (name, park_url)
-		@name = name
+	def initialize (park_name, park_url)
+		@park_name = park_name
 		@park_url = park_url
 		@@all << self  # Add each new NSW National Park instance to the collection as it is created
 	end
@@ -54,13 +54,13 @@ class NSWParks::Nsw_parks
     # Opens the park website in the user's default browser
     def self.park_url
    		park_no = 0
-   		@@all.each.with_index(1) {|a,i| puts "#{i}. #{a.name}"} # Puts outs list of National Parks
+   		@@all.each.with_index(1) {|a,i| puts "#{i}. #{a.park_name}"} # Puts outs list of National Parks
    		puts ""
    		puts "Select the park number from above and enter the number to access the website address"
    		park_no = gets.strip.to_i
    		# Validate user input - input must be numerical and exist in the list
    		while !(park_no.is_a? Integer) || park_no < 1 || park_no > @@all.length  
-   			@@all.each.with_index(1) {|a,i| puts "#{i}. #{a.name}"}  # Puts outs list of National Parks
+   			@@all.each.with_index(1) {|a,i| puts "#{i}. #{a.park_name}"}  # Puts outs list of National Parks
    			park_no = valid_input?
    		end	
    		system("open #{@@all[park_no - 1].park_url}")  # Puts out the park website address
@@ -70,7 +70,7 @@ class NSWParks::Nsw_parks
     def self.park_from_region(park)
  		@@all.each.with_index do |a,i| 
  			# Find the park in region in the @@all array and return its overview
- 			if a.name == park
+ 			if a.park_name == park
  				park_info(i + 1) 
  			end
 		end	
