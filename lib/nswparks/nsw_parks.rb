@@ -23,14 +23,6 @@ class NSWParks::Nsw_parks
 	    park.collect {|a| new(a.text.strip, a.attribute("href").value)}
   	end 	
 
-  	# Instructions to the user on how to use the provided website links
-  	def self.url_use
-  		puts "<------------------------------------------------------------------------------->"
-   		puts " Right-click or Control-click on the website address above and select 'open url'" 
-   		puts "  from the dropdown menu!! This will open the website in your default browser  "
-   		puts "<------------------------------------------------------------------------------->"
-  	end
-
   	# Allow users to access information on any NSW National Park
   	def self.park_overview(park_no)
   		check = ""
@@ -137,7 +129,6 @@ class NSWParks::Nsw_parks
    # Accesses the website information for a selected NSW National Park
    def self.park_url
    		input = 0
-   		array = 0
    		@@all.each.with_index(1) {|a,i| puts "#{i}. #{a.name}"} # Puts outs list of National Parks
    		puts ""
    		puts "Select the park number from above and enter the number to access the website address"
@@ -147,28 +138,19 @@ class NSWParks::Nsw_parks
    			@@all.each.with_index(1) {|a,i| puts "#{i}. #{a.name}"}  # Puts outs list of National Parks
    			input = valid_input
    		end	
-   		puts ""
-   		puts "The website address for #{@@all[input - 1].name} is:"  # Puts a heading of the park name
-   		puts ""
-   		puts @@all[input - 1].park_url  # Puts out the park website address
-   		puts ""  
-   		url_use  # Instructions to the user on how to use the provided website links
+   		system("open #{@@all[input - 1].park_url}")  # Puts out the park website address
    end
 
    # Provides user with a link to the map and instructions to open the link in their browser
    def self.park_map
-   		puts "http://www.nationalparks.nsw.gov.au/nsw-state-map" # No url to scrape - hidden
-   		puts ""
-   		url_use  # Instructions to the user on how to use the provided website links
+   		system("open http://www.nationalparks.nsw.gov.au/nsw-state-map") # No url to scrape - hidden
    end
 
    # Provides user with a link to guides and instructions to open the link in their browser
    def self.park_guide
    		page = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au"))	
    		link = page.css("#headerNavBottom nav ul li#mainNav__about .box ul li[5] a")
-   		puts link.attribute("href").value  # Puts out the website address forthe park guides
-   		puts ""
-   		url_use  # Instructions to the user on how to use the provided website links
+   		system("open #{link.attribute("href").value}")  # Puts out the website address forthe park guides
    	end	
  end 	
 
