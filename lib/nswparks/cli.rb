@@ -55,14 +55,14 @@ class NSWParks::CLI
     puts ""
     puts "The parks in the #{areas[region_no.to_i - 1]} region are:"
     array = NSWParks::Nsw_regions.park_region(region_no.to_s)
-    array.each.with_index(1) {|a,i| puts "#{i}. #{a}"} # Puts parks in region using Nsw_parks
+    array.each.with_index(1) {|region,i| puts "#{i}. #{region}"} # Puts parks in region using Nsw_parks
     puts ""
     puts "Enter your park number from this list for more information:"
     park_no = gets.strip.to_i 
     # Validate user input - input must be numerical and exist in the list  
     while !(park_no.is_a? Integer) || park_no < 1 || park_no > array.size
       array = NSWParks::Nsw_regions.park_region(region_no.to_s)
-      array.each.with_index(1) {|a,i| puts "#{i}. #{a}"}
+      array.each.with_index(1) {|region,i| puts "#{i}. #{region}"}
       park_no = NSWParks::Nsw_parks.valid_input?
     end
     puts ""
