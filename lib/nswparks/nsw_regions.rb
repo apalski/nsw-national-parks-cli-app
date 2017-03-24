@@ -19,29 +19,29 @@ class NSWParks::Nsw_regions
 	def self.create_region
 		page = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/visit-a-park/"))
 		region = page.css("#mainParkNavJump .wrapper ul li a")
-	    region.collect {|a| new(a.text.strip, "http://www.nationalparks.nsw.gov.au#{a.attribute("href").value}")}
+	    region.collect {|region| new(region.text.strip, "http://www.nationalparks.nsw.gov.au#{region.attribute("href").value}")}
 	end
 
 	# Show the Regions that NSW National Parks are listed within
 	# Puts out a numerical list of the NSW Regions that contain National Parks 
 	def self.nsw_regions
-		array = @@all.collect.with_index(1) { |a,i| puts "#{i}. #{a.region_name}"}
+		array = @@all.collect.with_index(1) { |region,i| puts "#{i}. #{region.region_name}"}
     end
 
     # Output the National Parks for each region as requested
 	def self.park_region(region_no)
 		region = @@all[region_no.to_i - 1]  # Select the region from the @@all array
 		page = Nokogiri::HTML(open("#{region.region_url}"))
-		link = page.css("#content__inner ul.detailRightColumn__linkList a")
-		array = region_sort(link) # Remove areas that are not National Parks 
+		park = page.css("#content__inner ul.detailRightColumn__linkList a")
+		array = region_sort(park) # Remove areas that are not National Parks 
 	end
 
 	# Removes areas that are not National Parks from the returned array
-   def self.region_sort(link)
-   		array = link.collect {|a| a.children.text}
-		array.select! {|a| a.include?("National")}
+   def self.region_sort(park)
+   		array = park.collect {|parks| parks.children.text}
+		array.select! {|parks| parks.include?("National")}
 		# Remove leading and trailing white space from the park names
-		clean = array.collect {|a| a.strip}
+		clean = array.collect {|parks| parks.strip}
    end
 end
 
