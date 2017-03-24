@@ -20,7 +20,7 @@ class NSWParks::Nsw_parks
    	def self.create_park
    		page = Nokogiri::HTML(open("http://www.nationalparks.nsw.gov.au/conservation-and-heritage/national-parks"))		
 	    park = page.css("#content__inner .dynamicListing li a")
-	    park.collect {|a| new(a.text.strip, a.attribute("href").value)}
+	    park.collect {|parks| new(parks.text.strip, parks.attribute("href").value)}
   	end 	
 
   	# Allow users to access information on any NSW National Park
@@ -54,23 +54,23 @@ class NSWParks::Nsw_parks
     # Opens the park website in the user's default browser
     def self.park_url
    		park_no = 0
-   		@@all.each.with_index(1) {|a,i| puts "#{i}. #{a.park_name}"} # Puts outs list of National Parks
+   		@@all.each.with_index(1) {|park,i| puts "#{i}. #{park.park_name}"} # Puts outs list of National Parks
    		puts ""
    		puts "Select the park number from above and enter the number to access the website address"
    		park_no = gets.strip.to_i
    		# Validate user input - input must be numerical and exist in the list
    		while !(park_no.is_a? Integer) || park_no < 1 || park_no > @@all.length  
-   			@@all.each.with_index(1) {|a,i| puts "#{i}. #{a.park_name}"}  # Puts outs list of National Parks
+   			@@all.each.with_index(1) {|park,i| puts "#{i}. #{park.park_name}"}  # Puts outs list of National Parks
    			park_no = valid_input?
    		end	
    		system("open #{@@all[park_no - 1].park_url}")  # Puts out the park website address
     end
 
     # Return overview for a park using its listing under its region
-    def self.park_from_region(park)
- 		@@all.each.with_index do |a,i| 
+    def self.park_from_region(region_park)
+ 		@@all.each.with_index do |park,i| 
  			# Find the park in region in the @@all array and return its overview
- 			if a.park_name == park
+ 			if park.park_name == region_park
  				park_info(i + 1) 
  			end
 		end	
